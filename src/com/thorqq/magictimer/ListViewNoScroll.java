@@ -40,10 +40,18 @@ public class ListViewNoScroll extends LinearLayout
     private Drawable mDivider;
     private int mDividerHeight;
     private boolean mClipDivider; 
+    
+    private View mHeaderView;
+    private View mFooterView;
             
     public void fillLinearLayout()
     {
         removeAllViews();
+        
+        if(mHeaderView != null)
+        {
+            addView(mHeaderView);
+        }
         
         int count = mAdapter.getCount();
         for (int i = 0; i < count; i++)
@@ -52,6 +60,12 @@ public class ListViewNoScroll extends LinearLayout
             v.setOnClickListener(this.onClickListener);
             addView(v);
         }
+        
+        if(mFooterView != null)
+        {
+            addView(mFooterView);
+        }
+
     }
     
     public void updateView()
@@ -97,10 +111,12 @@ public class ListViewNoScroll extends LinearLayout
 
     public void addFooterView(View v) 
     {
+        mFooterView = v;
     }
 
     public void addHeaderView(View v) 
     {
+        mHeaderView = v;
     }
 
     public void setDivider(Drawable divider) {
@@ -167,21 +183,11 @@ public class ListViewNoScroll extends LinearLayout
             final int count = getChildCount();
 
             int bottom;
-            int top;
             int listBottom = mBottom - mTop - 0;//mListPadding.bottom;
 
             for (int i = 0; i < count; i++) 
             {
                 View child = getChildAt(i);
-                
-                //第一行的上面的分割线
-//                if(i == 0)
-//                {
-//                    top = child.getTop();
-//                    bounds.top = top;
-//                    bounds.bottom = top + dividerHeight;
-//                    drawDivider(canvas, bounds, i);
-//                }
                 
                 bottom = child.getBottom();
                 // Don't draw dividers next to items that are not enabled

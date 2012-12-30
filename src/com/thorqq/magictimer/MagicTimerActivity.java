@@ -41,10 +41,10 @@ public class MagicTimerActivity extends Activity implements MsgReceiver
 
     private ArrayList<Map<String, Object>> mTimerItemList = new ArrayList<Map<String, Object>>();
     private AdapterTimerItem mTimerItemAdapter;
-    @SuppressWarnings("unused")
     private LayoutInflater mInflater;
     
     private ListViewNoScroll mTimerListview;
+    private View mTimerItemHeader;
     private TextView mMainTitle;
         
     /** Called when the activity is first created. */
@@ -70,14 +70,21 @@ public class MagicTimerActivity extends Activity implements MsgReceiver
         logVersion();
 
         mInflater = getLayoutInflater();
+        
+//        mMainTitle     = (TextView)findViewById(R.id.tvMainTitle);
+
+        //Timer item list view
         mTimerListview = (ListViewNoScroll)findViewById(R.id.ListViewTimerItem);
         mTimerListview.setDivider(this.getResources().getDrawable(R.drawable.gradient_shape_hor));
         mTimerListview.setDividerHeight(1);
-        mMainTitle     = (TextView)findViewById(R.id.tvMainTitle);
         
         mTimerItemAdapter = new AdapterTimerItem(this, mTimerItemList);
         mTimerListview.setAdapter(mTimerItemAdapter);
         
+        mTimerItemHeader = mInflater.inflate(R.layout.timer_item_header, null);
+        mTimerListview.addHeaderView(mTimerItemHeader);
+        
+        mMainTitle     = (TextView)mTimerItemHeader.findViewById(R.id.tvTimerItemHeaderTitle);
                
         //Ô¤ÖÃÊý¾Ý
         preset();
