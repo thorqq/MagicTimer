@@ -167,14 +167,25 @@ public class ListViewNoScroll extends LinearLayout
             final int count = getChildCount();
 
             int bottom;
+            int top;
             int listBottom = mBottom - mTop - 0;//mListPadding.bottom;
 
-            for (int i = 0; i < count - 1; i++) 
+            for (int i = 0; i < count; i++) 
             {
                 View child = getChildAt(i);
+                
+                //第一行的上面的分割线
+//                if(i == 0)
+//                {
+//                    top = child.getTop();
+//                    bounds.top = top;
+//                    bounds.bottom = top + dividerHeight;
+//                    drawDivider(canvas, bounds, i);
+//                }
+                
                 bottom = child.getBottom();
                 // Don't draw dividers next to items that are not enabled
-                if (bottom < listBottom) 
+                if (bottom <= listBottom) 
                 {
                     bounds.top = bottom;
                     bounds.bottom = bottom + dividerHeight;
