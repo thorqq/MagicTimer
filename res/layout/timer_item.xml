@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/TimerItemLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+   	android:background="@drawable/transparent_bg"
+    android:orientation="vertical">
+
+    <LinearLayout 
+        android:id="@+id/RelativeLayoutUp"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="horizontal">
+    
+	    <LinearLayout 
+	        android:id="@+id/RelativeLayoutTime"
+	        android:layout_width="wrap_content"
+	        android:layout_height="fill_parent"
+	        android:background="@drawable/list_item_selector"
+	        android:gravity="center"
+	        android:paddingLeft="5.0dip"
+	        android:paddingRight="5.0dip"
+	        android:orientation="vertical">
+	        <TextView
+	            android:id="@+id/TimerItemTime"
+	            android:textSize="22dip"
+	            android:text="time"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"/>
+	
+	        <ImageView
+	            android:id="@+id/ImageViewToggle"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_centerHorizontal="true"
+	            android:layout_marginTop="5.0dip"/>
+	    </LinearLayout>
+		
+	    <LinearLayout
+	        android:id="@+id/RelativeLayoutDivider_1"
+	        android:layout_width="1.0dip"
+	        android:layout_height="fill_parent"
+	        android:background="@drawable/gradient_shape_ver"
+	        android:layout_toRightOf="@+id/RelativeLayoutTime" />
+	    
+	    <LinearLayout 
+	        android:id="@+id/RelativeLayoutNameAndInfo"
+	        android:layout_width="fill_parent"
+	        android:layout_height="fill_parent"
+	        android:layout_weight="1"
+	        android:gravity="center_vertical"
+	        android:background="@drawable/list_item_selector"
+	        android:orientation="vertical">
+	        
+	        <TextView
+	            android:id="@+id/TimerItemNameInfo"
+	            android:text="name"
+	            android:textSize="16dip"
+	            android:layout_marginLeft="8.0dip"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"/>
+	
+	    </LinearLayout>
+	  	
+        <ImageView
+            android:id="@+id/TimerItemMore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+	        android:layout_alignParentRight="true"
+        	android:clickable="true"
+            android:src="@drawable/btn_more_selector"/>
+	        
+    </LinearLayout>
+    
+    <LinearLayout
+        android:id="@+id/RelativeLayoutDown"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/RelativeLayoutUp"
+    	android:background="@drawable/timer_item_child_bg"
+        android:visibility="gone"
+        android:orientation="vertical">
+	    
+	    <RelativeLayout
+	        android:id="@+id/RelativeLayoutDivider_3"
+	        android:layout_width="fill_parent"
+	        android:layout_height="1.0dip"
+	        android:background="@drawable/gradient_shape_hor"/>
+
+    </LinearLayout>
+    
+</RelativeLayout>

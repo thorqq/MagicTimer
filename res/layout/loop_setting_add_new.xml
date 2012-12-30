@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+        <LinearLayout
+            android:id="@id/clockView"
+            android:layout_width="wrap_content"
+            android:layout_height="15.0dip"
+            android:layout_gravity="fill_vertical|center"
+            android:layout_weight="1.0" />
+
+        <LinearLayout 
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" >
+
+		    <TextView
+		        android:id="@+id/textViewStartWeekDay"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_centerVertical="true"
+		        android:text="新增循环类型" />
+		    
+	        <Button
+	            android:id="@+id/buttonAddLoopDay"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="按日循环" />
+		    <TextView
+		        android:id="@+id/textRemark"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_centerVertical="true"
+		        android:text="每天/每隔n天/每n天为一个循环，其中的指定天启动提醒" />
+		    
+	        <Button
+	            android:id="@+id/buttonAddLoopWeek"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="按周循环" />
+		    <TextView
+		        android:id="@+id/textRemark"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_centerVertical="true"
+		        android:text="每周一/每周一至周五" />
+	        
+	        <Button
+	            android:id="@+id/buttonAddLoopMon"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="按月循环" />
+		    <TextView
+		        android:id="@+id/textRemark"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_centerVertical="true"
+		        android:text="月内按日循环：指定某几个月中的某几日" />
+		    <TextView
+		        android:id="@+id/textRemark"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_centerVertical="true"
+		        android:text="月内按周循环：指定某几个月内的第几周的周几" />
+		    		    
+	        <Button
+	            android:id="@+id/buttonAddLoopYYmd"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="指定年月日" />
+		    <TextView
+		        android:id="@+id/textRemark"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_centerVertical="true"
+		        android:text="yyyy年mm月dd日" />
+	        	        		    		    
+        </LinearLayout>
+
+            
+        <LinearLayout
+            style="@android:style/ButtonBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <Button
+                android:id="@+id/btnTimeSettingCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+        		android:gravity="center_horizontal"
+                android:text="取消" />
+        </LinearLayout>
+
+</LinearLayout>

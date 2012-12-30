@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/dialog"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@id/clockView"
+            android:layout_width="wrap_content"
+            android:layout_height="15.0dip"
+            android:layout_gravity="fill_vertical|center"
+            android:layout_weight="1.0" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/textViewStartDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="开始日期" />
+
+            <DatePicker
+                android:id="@+id/datePicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/textViewStartDate" />
+
+        </RelativeLayout>
+
+        <TableLayout 
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:shrinkColumns="1"
+            android:stretchColumns="1">
+            
+	        <TableRow
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content" >
+	
+	            <TextView
+	                android:id="@+id/textViewLoopDays"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:text="循环周期" />
+	
+	            <EditText
+	                android:id="@+id/editTextLoopDays"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_weight="1"
+	                android:inputType="numberSigned" />
+	            <Button
+	                android:id="@+id/btnDayMask"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:text="启动日" />
+            
+            </TableRow>
+
+	        <TableRow
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content" >
+	
+	            <TextView
+	                android:id="@+id/textViewMaxCount"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:text="循环次数" />
+	
+	            <EditText
+	                android:id="@+id/editTextMaxCount"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_weight="1"
+	                android:inputType="number" />
+	            <CheckBox
+	                android:id="@+id/checkBoxInfinity"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:text="不限" />
+            
+            </TableRow>
+            
+        </TableLayout>
+            
+        <LinearLayout
+            style="@android:style/ButtonBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <Button
+                android:id="@+id/btnTimeSettingSave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3.0"
+                android:text="确定" />
+
+            <View
+                android:layout_width="2.0dip"
+                android:layout_height="2.0dip"
+                android:layout_gravity="fill_horizontal"
+                android:layout_weight="1.0" />
+
+            <Button
+                android:id="@+id/btnTimeSettingCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3.0"
+                android:text="取消" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
