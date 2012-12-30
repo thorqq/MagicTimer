@@ -115,7 +115,7 @@ public class AdapterAction extends BaseAdapter
         });
         
         //É¾³ý±¾ÌõÄ¿
-        holder.deleteAction.setText("É¾³ý");
+//        holder.deleteAction.setText("É¾³ý");
         holder.deleteAction.setOnClickListener(new Button.OnClickListener()
         {
             public void onClick(View v)
