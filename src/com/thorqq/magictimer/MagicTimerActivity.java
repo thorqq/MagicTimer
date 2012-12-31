@@ -59,15 +59,15 @@ public class MagicTimerActivity extends Activity implements MsgReceiver
 //        handler.init(getApplicationContext());
 //        Thread.setDefaultUncaughtExceptionHandler(handler);
         
-        //初始化日志
-        Util.initLog(null);
-        
-        //初始化数据库
-        DBHelper.initialize(this);
-        DBHelper.getIntance().open();
-        
-        //软件版本
-        logVersion();
+//        //初始化日志
+//        Util.initLog(null);
+//        
+//        //初始化数据库
+//        DBHelper.initialize(this);
+//        DBHelper.getIntance().open();
+//        
+//        //软件版本
+//        logVersion();
 
         mInflater = getLayoutInflater();
         
@@ -102,23 +102,23 @@ public class MagicTimerActivity extends Activity implements MsgReceiver
         StatHelper.getInstance(this).printParams();
     }
     
-    private void logVersion()
-    {
-        PackageManager packageManager = getPackageManager();
-        try
-        {
-            // getPackageName()是你当前类的包名，0代表是获取版本信息
-            PackageInfo packInfo = packageManager.getPackageInfo(getPackageName(),0);
-            String versionName = packInfo.versionName;
-            int versionCode = packInfo.versionCode;
-            
-            Util.log(getPackageName() + " " + versionName + "(" + versionCode + ")");
-        }
-        catch (NameNotFoundException e)
-        {
-            Util.log_ex(e);
-        }
-    }
+//    private void logVersion()
+//    {
+//        PackageManager packageManager = getPackageManager();
+//        try
+//        {
+//            // getPackageName()是你当前类的包名，0代表是获取版本信息
+//            PackageInfo packInfo = packageManager.getPackageInfo(getPackageName(),0);
+//            String versionName = packInfo.versionName;
+//            int versionCode = packInfo.versionCode;
+//            
+//            Util.log(getPackageName() + " " + versionName + "(" + versionCode + ")");
+//        }
+//        catch (NameNotFoundException e)
+//        {
+//            Util.log_ex(e);
+//        }
+//    }
     
     public void startTimerSettingActivity(Timer timer)
     {
