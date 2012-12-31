@@ -22,9 +22,6 @@ import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -32,7 +29,6 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class MagicTimerActivity extends Activity implements MsgReceiver
@@ -45,7 +41,7 @@ public class MagicTimerActivity extends Activity implements MsgReceiver
     
     private ListViewNoScroll mTimerListview;
     private View mTimerItemHeader;
-    private TextView mMainTitle;
+//    private TextView mMainTitle;
         
     /** Called when the activity is first created. */
     @Override
@@ -84,7 +80,7 @@ public class MagicTimerActivity extends Activity implements MsgReceiver
         mTimerItemHeader = mInflater.inflate(R.layout.timer_item_header, null);
         mTimerListview.addHeaderView(mTimerItemHeader);
         
-        mMainTitle     = (TextView)mTimerItemHeader.findViewById(R.id.tvTimerItemHeaderTitle);
+//        mMainTitle     = (TextView)mTimerItemHeader.findViewById(R.id.tvTimerItemHeaderTitle);
                
         //预置数据
         preset();
@@ -286,19 +282,19 @@ public class MagicTimerActivity extends Activity implements MsgReceiver
                 {
                     displayToastLong((String)msg.obj); 
                 }
-                else if(MsgReceiver.MSG_UPDATE_TIMER == msg.what)
-                {
-                    updateLayout();
-                    Timer timer = (Timer)msg.obj;
-                    if(timer != null)
-                    {
-                        mMainTitle.setText(timer.getName() + "\n" + Util.MillisToStr(timer.getNextTime()));
-                    }
-                    else
-                    {
-                        mMainTitle.setText("没有提醒");
-                    }
-                }
+//                else if(MsgReceiver.MSG_UPDATE_TIMER == msg.what)
+//                {
+//                    updateLayout();
+//                    Timer timer = (Timer)msg.obj;
+//                    if(timer != null)
+//                    {
+//                        mMainTitle.setText(timer.getName() + "\n" + Util.MillisToStr(timer.getNextTime()));
+//                    }
+//                    else
+//                    {
+//                        mMainTitle.setText("没有提醒");
+//                    }
+//                }
             }
             catch(Exception e)
             {

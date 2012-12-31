@@ -17,8 +17,6 @@
 package com.thorqq.magictimer;
 
 import com.thorqq.magictimer.core.TimerMgr;
-import com.thorqq.magictimer.db.DBHelper;
-import com.thorqq.magictimer.util.Util;
 
 import android.content.Context;
 import android.content.Intent;

@@ -3,7 +3,7 @@
     android:id="@+id/LinearLayoutTimerItemHeader"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/main_title_bg"
+    android:background="@drawable/list_header_bg"
     android:gravity="center_vertical"
     android:orientation="horizontal"
     android:paddingBottom="5.0dip"
@@ -17,15 +17,5 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:src="@drawable/ic_launcher" />
-
-    <TextView
-        android:id="@+id/tvTimerItemHeaderTitle"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_marginLeft="10.0dip"
-        android:text="@string/defaultMainTitle"
-        android:textColor="@drawable/white"
-        android:textSize="18dip" />
 
 </LinearLayout>
