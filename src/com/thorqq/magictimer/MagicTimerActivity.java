@@ -499,7 +499,8 @@ public class MagicTimerActivity extends Activity implements MsgReceiver
                     ActionMgr.getIntance().createAction(timeDef.getID(), 
                             0, ActionMgr.ACTION_NOTIFY,"param2"));
         }
-//
+        
+////////////////////////////////////////////////////////////////////////////////
 //        {
 //            int iPolicyOrder = 0;
 //            TTimerDef timeDef = QuickSetting.setHourMinute(7, 30);

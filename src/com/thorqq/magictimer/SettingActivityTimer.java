@@ -49,10 +49,12 @@ public class SettingActivityTimer extends Activity
     private ArrayList<Map<String, Object>> mLoopPolicyList = new ArrayList<Map<String, Object>>();
     private AdapterLoopPolicy mLoopPolicyAdapter;
     private ListViewNoScroll mLoopPolicyListView;
+    private View mPolicyItemHeader;
 
     private ArrayList<Map<String, Object>> mActionList = new ArrayList<Map<String, Object>>();
     private AdapterAction mActionAdapter;
     private ListViewNoScroll mActionListView;
+    private View mActionItemHeader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -81,21 +83,28 @@ public class SettingActivityTimer extends Activity
 
         mBtnSave = (Button) findViewById(R.id.btnSave);
         mBtnCancel = (Button) findViewById(R.id.btnCancel);
-        
-        mBtnAddLoopPolicy = (Button) findViewById(R.id.btnAddLoopPolicy);
-        mBtnAddAction = (Button) findViewById(R.id.btnAddAction);
-        
+                
+        //循环策略
         mLoopPolicyListView = (ListViewNoScroll)findViewById(R.id.ListViewNoScrollLoopPolicy);
         mLoopPolicyAdapter = new AdapterLoopPolicy(this, mLoopPolicyList);
         mLoopPolicyListView.setAdapter(mLoopPolicyAdapter);
         mLoopPolicyListView.setDivider(this.getResources().getDrawable(R.drawable.gradient_shape_hor));
         mLoopPolicyListView.setDividerHeight(1);
+        
+        mPolicyItemHeader = getLayoutInflater().inflate(R.layout.policy_item_header, null);
+        mLoopPolicyListView.addHeaderView(mPolicyItemHeader);
+        mBtnAddLoopPolicy = (Button) mPolicyItemHeader.findViewById(R.id.btnAddLoopPolicy);
 
+        //定时动作
         mActionListView = (ListViewNoScroll)findViewById(R.id.ListViewNoScrollAction);
         mActionAdapter = new AdapterAction(this, mActionList);
         mActionListView.setAdapter(mActionAdapter);
         mActionListView.setDivider(this.getResources().getDrawable(R.drawable.gradient_shape_hor));
         mActionListView.setDividerHeight(1);
+        
+        mActionItemHeader = getLayoutInflater().inflate(R.layout.timing_action_item_header, null);
+        mActionListView.addHeaderView(mActionItemHeader);
+        mBtnAddAction = (Button) mActionItemHeader.findViewById(R.id.btnAddAction);
     }
     
     private void updatePolicyLayout()
