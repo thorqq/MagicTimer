@@ -3,7 +3,7 @@
     android:id="@+id/LinearLayoutTimerItemHeader"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/list_header_bg"
+    android:background="@drawable/timer_item_header_bg"
     android:gravity="center_vertical"
     android:orientation="horizontal"
     android:paddingBottom="5.0dip"
