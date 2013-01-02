@@ -22,7 +22,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class SettingActivityTimer extends Activity
 {
@@ -35,26 +36,31 @@ public class SettingActivityTimer extends Activity
     
     private Timer mTimer;
 
-    private EditText mEtTimerName;
-    private EditText mEtTimerRemark;
+    //time
+    private TextView mTvTime;
+    private LinearLayout mLayoutTime;
 
-    private Button mBtnTime;
-
-    private Button mBtnSave;
-    private Button mBtnCancel;
+    //name
+    private TextView mTvName;
+    private LinearLayout mLayoutName;
     
+    //policy
     private Button mBtnAddLoopPolicy;
-    private Button mBtnAddAction;
-
     private ArrayList<Map<String, Object>> mLoopPolicyList = new ArrayList<Map<String, Object>>();
     private AdapterLoopPolicy mLoopPolicyAdapter;
     private ListViewNoScroll mLoopPolicyListView;
     private View mPolicyItemHeader;
 
+    //action
+    private Button mBtnAddAction;
     private ArrayList<Map<String, Object>> mActionList = new ArrayList<Map<String, Object>>();
     private AdapterAction mActionAdapter;
     private ListViewNoScroll mActionListView;
     private View mActionItemHeader;
+
+    //save & cancel
+    private Button mBtnSave;
+    private Button mBtnCancel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -76,13 +82,13 @@ public class SettingActivityTimer extends Activity
     
     private void initLayout()
     {
-        mEtTimerName = (EditText) findViewById(R.id.editTextTimerNmae);
-        mEtTimerRemark = (EditText) findViewById(R.id.editTextRemark);
+        //time
+        mTvTime = (TextView) findViewById(R.id.tvTime);
+        mLayoutTime = (LinearLayout) findViewById(R.id.LinearLayoutTimeSettingTime);
         
-        mBtnTime = (Button) findViewById(R.id.btnStartTime);
-
-        mBtnSave = (Button) findViewById(R.id.btnSave);
-        mBtnCancel = (Button) findViewById(R.id.btnCancel);
+        //name
+        mTvName = (TextView) findViewById(R.id.tvName);
+        mLayoutName = (LinearLayout) findViewById(R.id.LinearLayoutTimeSettingName);
                 
         //循环策略
         mLoopPolicyListView = (ListViewNoScroll)findViewById(R.id.ListViewNoScrollLoopPolicy);
@@ -105,6 +111,10 @@ public class SettingActivityTimer extends Activity
         mActionItemHeader = getLayoutInflater().inflate(R.layout.timing_action_item_header, null);
         mActionListView.addHeaderView(mActionItemHeader);
         mBtnAddAction = (Button) mActionItemHeader.findViewById(R.id.btnAddAction);
+        
+        //
+        mBtnSave = (Button) findViewById(R.id.btnSave);
+        mBtnCancel = (Button) findViewById(R.id.btnCancel);
     }
     
     private void updatePolicyLayout()
@@ -124,8 +134,10 @@ public class SettingActivityTimer extends Activity
     
     private void updateTimerDefLayout()
     {
-        // 启动时间
-        mBtnTime.setText(mTimer.getTimerDef().getDescription());
+        //time
+        mTvTime.setText(mTimer.getTimerDef().getDescription());
+        //name
+        mTvName.setText(mTimer.getName());
     }
 
     private void updateActionLayout()
@@ -143,11 +155,7 @@ public class SettingActivityTimer extends Activity
     }
     
     private void updateLayout()
-    {
-        // 名称、备注
-        mEtTimerName.setText(mTimer.getName());
-        mEtTimerRemark.setText(mTimer.getRemark());
-
+    {        
         updateTimerDefLayout();
         updatePolicyLayout();
         updateActionLayout();
@@ -168,80 +176,24 @@ public class SettingActivityTimer extends Activity
         builder.create().show();
     }
 
-//    private void displayInputDialog(String title, final int btnType)
-//    {
-//        //TODO: 需限制editText输入的字符数
-//        final EditText editText = new EditText(this);
-//        if(btnType == BUTTON_NAME)
-//        {
-//            editText.setText(mTimer.getName());
-//        }
-//        else if(btnType == BUTTON_REMARK)
-//        {
-//            editText.setText(mTimer.getRemark());
-//        }
-//        
-//        AlertDialog.Builder builder = new Builder(this);
-//        builder.setTitle(title);
-//        builder.setView(editText);
-//        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
-//            public void onClick(DialogInterface dialog, int which) {
-//                
-//                if(btnType == BUTTON_NAME)
-//                {
-//                    if(editText.getText().length() <= 0)
-//                    {
-//                        displayValidDialog("请输入闹钟名称");
-//                    }
-//                    else
-//                    {
-//                        mBtnTimerName.setText(editText.getText());
-//                        mTimer.setName(editText.getText().toString());
-//                    }
-//                }
-//                else if(btnType == BUTTON_REMARK)
-//                {
-//                    mBtnTimerRemark.setText(editText.getText());
-//                    mTimer.setRemark(editText.getText().toString());
-//                }
-//            }
-//        });
-//        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-//            public void onClick(DialogInterface dialog, int which) {
-//                dialog.dismiss();
-//            }
-//        });
-//
-//        builder.create().show();
-//    }
-
     private void registerListener()
     {
-//        // 名称
-//        mBtnTimerName.setOnClickListener(new Button.OnClickListener()
-//        {
-//            public void onClick(View v)
-//            {
-//                displayInputDialog("请输入闹钟名称", BUTTON_NAME);
-//            }
-//
-//        });
-//
-//        // 备注
-//        mBtnTimerRemark.setOnClickListener(new Button.OnClickListener()
-//        {
-//            public void onClick(View v)
-//            {
-//                displayInputDialog("请输入备注信息", BUTTON_REMARK);
-//            }
-//
-//        });
-
-        // 启动时间设置
-        mBtnTime.setOnClickListener(new Button.OnClickListener()
+        // 名称
+        mLayoutName.setOnClickListener(new LinearLayout.OnClickListener()
         {
             public void onClick(View v)
             {
+            }
+
+        });
+                
+
+        // 启动时间设置
+        mLayoutTime.setOnClickListener(new LinearLayout.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                Util.log("mLayoutTime onClick");
                 // 弹出启动时间设置界面
                 startTimerSettingActivity(mTimer);
             }
@@ -276,14 +228,13 @@ public class SettingActivityTimer extends Activity
         {
             public void onClick(View v)
             {
-                if(mEtTimerName.getText().length() == 0)
+                if(mTvName.getText().length() == 0)
                 {
                     displayValidDialog("请输入闹钟名称");
                     return;
                 }
                 
-                mTimer.setName(mEtTimerName.getText().toString());
-                mTimer.setRemark(mEtTimerRemark.getText().toString());
+                mTimer.setName(mTvName.getText().toString());
                 
                 //循环策略
                 mTimer.getLoopPolicys().clear();
