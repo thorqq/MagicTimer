@@ -40,17 +40,21 @@ public class AdapterTimerItem extends BaseAdapter {
 
     private LayoutInflater mInflater;
 	private List<Map<String, Object>> mData;
+	@SuppressWarnings("unused")
+    private Context mContext;
 
 	public AdapterTimerItem(Context context)
 	{
 		mInflater = LayoutInflater.from(context);
 		mData = new ArrayList<Map<String, Object>>();
+		mContext = context;
 	}
 
 	public AdapterTimerItem(Context context, List<Map<String, Object>> data)
 	{
 		mInflater = LayoutInflater.from(context);
 		mData = data;
+        mContext = context;
 	}
 
 	public void add(Map<String, Object> map)
@@ -145,6 +149,7 @@ public class AdapterTimerItem extends BaseAdapter {
 			holder = (ViewHolder)convertView.getTag();
 		}
 				
+//		holder.time.setTypeface(((MagicTimerApp)mContext.getApplicationContext()).getNumTypeFace());
 		holder.time.setText(Util.MillisToHHMM(timer.getNextTime()));
         holder.name_info.setText(timer.getName() + "\n" + Util.MillisToYYYYMMDD(timer.getNextTime()));
         holder.rLayoutDown.setVisibility(visibility);

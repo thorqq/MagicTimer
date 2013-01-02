@@ -7,9 +7,12 @@ import android.app.Application;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.graphics.Typeface;
 
 public class MagicTimerApp extends Application
 {
+    
+    Typeface mNumTypeFase;
 
     @Override
     public void onCreate()
@@ -25,8 +28,16 @@ public class MagicTimerApp extends Application
         DBHelper.initialize(this);
         DBHelper.getIntance().open();
         
+        //×ÖÌå
+        mNumTypeFase = Typeface.createFromAsset (getAssets() , "fonts/lcdD.ttf");
+        
         Util.log("MagicTimerApp.onCreate success");
 
+    }
+    
+    public Typeface getNumTypeFace()
+    {
+        return mNumTypeFase;
     }
 
     private void logVersion()

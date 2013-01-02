@@ -6,11 +6,6 @@
     android:background="@drawable/main_bg"
     android:orientation="vertical" >
 
-	<EditText android:focusable="true" 
-        android:focusableInTouchMode="true"
-        android:layout_width="0px" 
-        android:layout_height="0px"/>
-    
     <ScrollView
         android:id="@+id/scrollViewTimerSetting"
         android:layout_width="fill_parent"
@@ -37,12 +32,7 @@
 		        
 			<include layout="@layout/time_setting_time" />
 
-            <LinearLayout
-		        android:layout_width="fill_parent"
-		        android:layout_height="1.0dip"
-		        android:background="@drawable/gradient_shape_hor"/>
-		        
-			<include layout="@layout/time_setting_name" />
+
 			
             <com.thorqq.magictimer.ListViewNoScroll
                 android:id="@+id/ListViewNoScrollLoopPolicy"
@@ -74,6 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="7.0"
+	        android:background="@drawable/btn_save_selector"
             android:text="保存" />
 
         <View
@@ -87,6 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="7.0"
+	        android:background="@drawable/btn_cancel_selector"
             android:text="取消" />
     </LinearLayout>
 

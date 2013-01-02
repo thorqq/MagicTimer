@@ -36,13 +36,10 @@ public class SettingActivityTimer extends Activity
     
     private Timer mTimer;
 
-    //time
-    private TextView mTvTime;
+    //time & name
     private LinearLayout mLayoutTime;
-
-    //name
+    private TextView mTvTime;
     private TextView mTvName;
-    private LinearLayout mLayoutName;
     
     //policy
     private Button mBtnAddLoopPolicy;
@@ -85,10 +82,10 @@ public class SettingActivityTimer extends Activity
         //time
         mTvTime = (TextView) findViewById(R.id.tvTime);
         mLayoutTime = (LinearLayout) findViewById(R.id.LinearLayoutTimeSettingTime);
+        mTvTime.setTypeface(((MagicTimerApp)getApplicationContext()).getNumTypeFace());
         
         //name
         mTvName = (TextView) findViewById(R.id.tvName);
-        mLayoutName = (LinearLayout) findViewById(R.id.LinearLayoutTimeSettingName);
                 
         //循环策略
         mLoopPolicyListView = (ListViewNoScroll)findViewById(R.id.ListViewNoScrollLoopPolicy);
@@ -135,7 +132,7 @@ public class SettingActivityTimer extends Activity
     private void updateTimerDefLayout()
     {
         //time
-        mTvTime.setText(mTimer.getTimerDef().getDescription());
+        mTvTime.setText(mTimer.getTimerDef().getDescription() + " ");
         //name
         mTvName.setText(mTimer.getName());
     }
@@ -178,16 +175,6 @@ public class SettingActivityTimer extends Activity
 
     private void registerListener()
     {
-        // 名称
-        mLayoutName.setOnClickListener(new LinearLayout.OnClickListener()
-        {
-            public void onClick(View v)
-            {
-            }
-
-        });
-                
-
         // 启动时间设置
         mLayoutTime.setOnClickListener(new LinearLayout.OnClickListener()
         {
