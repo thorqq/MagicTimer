@@ -57,8 +57,6 @@
         android:id="@+id/linearLayoutMiddle"
         android:layout_width="fill_parent"
         android:layout_height="1.0dip"
-		android:paddingLeft="4.0dip"
-		android:paddingRight="4.0dip"
         android:layout_above="@+id/linearLayoutBottom"
         android:background="@drawable/gradient_shape_hor"/>
 
@@ -66,8 +64,6 @@
         android:id="@+id/linearLayoutBottom"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-		android:paddingLeft="4.0dip"
-		android:paddingRight="4.0dip"
         android:layout_alignParentBottom="true" >
 
         <Button

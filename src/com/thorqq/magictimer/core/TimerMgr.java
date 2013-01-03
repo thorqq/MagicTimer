@@ -154,6 +154,12 @@ public class TimerMgr
 
         return mTimerArray;
     }
+    
+    //TODO
+    public static void addTimer(Timer t)
+    {
+        
+    }
 
     /**
      * 根据id查找定时器

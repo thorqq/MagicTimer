@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/LinearLayoutMain"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -12,6 +12,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_above="@+id/linearLayoutMiddle"
         android:scrollbars="vertical" >
 
         <LinearLayout
@@ -30,4 +31,38 @@
 		        android:cacheColorHint="#00000000"/>
     	</LinearLayout>
     </ScrollView>
-</LinearLayout>
+    
+    <LinearLayout
+        android:id="@+id/linearLayoutMiddle"
+        android:layout_width="fill_parent"
+        android:layout_height="1.0dip"
+        android:layout_above="@+id/linearLayoutAddNewTimer"
+        android:background="@drawable/gradient_shape_hor"/>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutAddNewTimer"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+		android:gravity="center"
+        android:background="@drawable/btn_ok_cancel_selector"
+    	android:clickable="true"
+        android:layout_alignParentBottom="true" >
+
+		<ImageView
+		    android:id="@+id/ivAddNew"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:background="@drawable/add"/>
+		    
+        <TextView
+            android:id="@+id/tvAddNew"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+	    	android:layout_marginLeft="10.0dip"
+	        android:textColor="@android:color/white"
+	        android:textSize="18.0sp"
+            android:text="添加新闹铃" />
+
+    </LinearLayout>
+
+</RelativeLayout>

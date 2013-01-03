@@ -29,6 +29,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class MagicTimerActivity extends Activity implements MsgReceiver
@@ -39,9 +40,9 @@ public class MagicTimerActivity extends Activity implements MsgReceiver
     private AdapterTimerItem mTimerItemAdapter;
     private LayoutInflater mInflater;
     
-    private ListViewNoScroll mTimerListview;
     private View mTimerItemHeader;
-//    private TextView mMainTitle;
+    private ListViewNoScroll mTimerListview;
+    private View mAddNewTimerLayout;
         
     /** Called when the activity is first created. */
     @Override
@@ -54,21 +55,9 @@ public class MagicTimerActivity extends Activity implements MsgReceiver
 //        MyCrashHandler handler = MyCrashHandler.getInstance();
 //        handler.init(getApplicationContext());
 //        Thread.setDefaultUncaughtExceptionHandler(handler);
-        
-//        //初始化日志
-//        Util.initLog(null);
-//        
-//        //初始化数据库
-//        DBHelper.initialize(this);
-//        DBHelper.getIntance().open();
-//        
-//        //软件版本
-//        logVersion();
 
         mInflater = getLayoutInflater();
         
-//        mMainTitle     = (TextView)findViewById(R.id.tvMainTitle);
-
         //Timer item list view
         mTimerListview = (ListViewNoScroll)findViewById(R.id.ListViewTimerItem);
         mTimerListview.setDivider(this.getResources().getDrawable(R.drawable.gradient_shape_hor));
@@ -80,8 +69,8 @@ public class MagicTimerActivity extends Activity implements MsgReceiver
         mTimerItemHeader = mInflater.inflate(R.layout.timer_item_header, null);
         mTimerListview.addHeaderView(mTimerItemHeader);
         
-//        mMainTitle     = (TextView)mTimerItemHeader.findViewById(R.id.tvTimerItemHeaderTitle);
-               
+        mAddNewTimerLayout = (View)findViewById(R.id.linearLayoutAddNewTimer);
+                       
         //预置数据
         preset();
         
@@ -90,6 +79,8 @@ public class MagicTimerActivity extends Activity implements MsgReceiver
         TimerMgr.setNextTimer(this, TimerMgr.SPEC_TIME_ID_ALL);
         //更新界面
         updateLayout();
+        //
+        registerListener();
         
         //检查更新
         UpdateManager manager = new UpdateManager(this);
@@ -97,24 +88,6 @@ public class MagicTimerActivity extends Activity implements MsgReceiver
         
         StatHelper.getInstance(this).printParams();
     }
-    
-//    private void logVersion()
-//    {
-//        PackageManager packageManager = getPackageManager();
-//        try
-//        {
-//            // getPackageName()是你当前类的包名，0代表是获取版本信息
-//            PackageInfo packInfo = packageManager.getPackageInfo(getPackageName(),0);
-//            String versionName = packInfo.versionName;
-//            int versionCode = packInfo.versionCode;
-//            
-//            Util.log(getPackageName() + " " + versionName + "(" + versionCode + ")");
-//        }
-//        catch (NameNotFoundException e)
-//        {
-//            Util.log_ex(e);
-//        }
-//    }
     
     public void startTimerSettingActivity(Timer timer)
     {
@@ -149,7 +122,34 @@ public class MagicTimerActivity extends Activity implements MsgReceiver
         mTimerItemAdapter.notifyDataSetChanged(); 
         
     }
+    
+    private void addTimer(Timer t)
+    {
+        //TODO 内部结构中新增一个timer，并插入数据库。内部自动计算下一个timer
+        TimerMgr.addTimer(t);
+        
+        //TODO mTimerItemList 要add timer
+    }
 
+    private void registerListener()
+    {
+        // 新增一个timer
+        mAddNewTimerLayout.setOnClickListener(new LinearLayout.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                //TODO 生成一个timer，并初始化
+                Timer t = new Timer();
+                
+                
+                
+                
+                addTimer(t);
+            }
+
+        });
+    }
+    
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {

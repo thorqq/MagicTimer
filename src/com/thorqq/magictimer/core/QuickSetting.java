@@ -32,6 +32,7 @@ public class QuickSetting
     static public TTimerDef countdownFromNowOn(int intervalMinutes)
     {
         int maxCount = 1;
+        mNow = Calendar.getInstance();
         int startHour = mNow.get(Calendar.HOUR_OF_DAY);
         int startMinute = mNow.get(Calendar.MINUTE) + intervalMinutes;
         return QuickSetting.setTime(maxCount, 0, startHour, startMinute);

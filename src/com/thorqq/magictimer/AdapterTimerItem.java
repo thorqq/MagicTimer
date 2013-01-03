@@ -150,8 +150,12 @@ public class AdapterTimerItem extends BaseAdapter {
 		}
 				
 //		holder.time.setTypeface(((MagicTimerApp)mContext.getApplicationContext()).getNumTypeFace());
-		holder.time.setText(Util.MillisToHHMM(timer.getNextTime()));
-        holder.name_info.setText(timer.getName() + "\n" + Util.MillisToYYYYMMDD(timer.getNextTime()));
+		holder.time.setText(Util.formatTwoNumber(timer.getTimerDef().getStartHour()) + 
+		                    ":" + 
+		                    Util.formatTwoNumber(timer.getTimerDef().getStartMinute()) );
+        holder.name_info.setText(timer.getName() + "\n" + 
+                                 Util.MillisToYYYYMMDD(timer.getNextTime()) + " " + 
+                                 Util.MillisToHHMM(timer.getNextTime()));
         holder.rLayoutDown.setVisibility(visibility);
         
         if(visibility == View.GONE)
