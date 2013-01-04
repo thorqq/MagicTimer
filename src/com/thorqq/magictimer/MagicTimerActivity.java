@@ -71,7 +71,7 @@ public class MagicTimerActivity extends Activity implements MsgReceiver
         
         mAddNewTimerLayout = (View)findViewById(R.id.linearLayoutAddNewTimer);
                        
-        //预置数据
+        //TODO 预置数据。测试用。发布时应删除
         preset();
         
         // 启动闹铃
@@ -235,6 +235,9 @@ public class MagicTimerActivity extends Activity implements MsgReceiver
     {
         DBHelper.getIntance().close();
         super.onDestroy();
+        
+        //TODO 测试用。发布时应删除
+        System.exit(0); 
     }
 
     public void displayToast(String str)
@@ -426,6 +429,7 @@ public class MagicTimerActivity extends Activity implements MsgReceiver
     private void preset()
     {
         // 预置数据
+        Util.log("preset timer data");
         DBHelper.getIntance().deleteAllTimer();
 
         {
