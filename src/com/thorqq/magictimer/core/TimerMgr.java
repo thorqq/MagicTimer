@@ -155,10 +155,10 @@ public class TimerMgr
         return mTimerArray;
     }
     
-    //TODO
     public static void addTimer(Timer t)
     {
-        
+        DBHelper.getIntance().insertTimer(t);
+        mTimerArray.add(t);
     }
 
     /**

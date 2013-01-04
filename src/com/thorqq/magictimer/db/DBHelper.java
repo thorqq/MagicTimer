@@ -203,6 +203,11 @@ public class DBHelper {
         return result;
     }
     
+    public boolean insertTimer(Timer timer)
+    {
+        return updateTimer(timer);
+    }
+    
     public boolean updateTimer(Timer timer)
     {
         SQLiteDatabase db = mOpenHelper.getWritableDatabase();

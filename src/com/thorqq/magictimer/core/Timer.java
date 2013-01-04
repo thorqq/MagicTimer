@@ -134,7 +134,7 @@ public class Timer implements Parcelable
 
     public void setAction(TAction action)
     {
-        int iMaxDisplayOrder = 0;
+        int iMaxDisplayOrder = -1;
         int i = 0;
         for(; i < mActions.size(); i++)
         {

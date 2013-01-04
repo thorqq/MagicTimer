@@ -125,10 +125,25 @@ public class MagicTimerActivity extends Activity implements MsgReceiver
     
     private void addTimer(Timer t)
     {
-        //TODO 内部结构中新增一个timer，并插入数据库。内部自动计算下一个timer
+        //内部结构中新增一个timer，并插入数据库
         TimerMgr.addTimer(t);
         
-        //TODO mTimerItemList 要add timer
+        //mTimerItemList 要add timer
+        int pos = mTimerItemList.size();
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("timer", t);
+        
+        map.put("listenerNameInfo", new ListenerNameInfo(this, t));
+        map.put("listenerTime", new ListenerTime(this, t));
+        
+        map.put("childViewResource", R.layout.timer_item_child);
+        map.put("listenerMore", new ListenerMore(this,t, pos));
+        map.put("visibility", View.GONE);
+        
+        mTimerItemList.add(map);
+        TimerMgr.setNextTimer(this, t.getID());
+        mTimerItemAdapter.notifyDataSetChanged(); 
+
     }
 
     private void registerListener()
@@ -138,13 +153,17 @@ public class MagicTimerActivity extends Activity implements MsgReceiver
         {
             public void onClick(View v)
             {
-                //TODO 生成一个timer，并初始化
+                //生成一个timer，并初始化
                 Timer t = new Timer();
                 
+                t.setTimerDef(QuickSetting.setHourMinute(7, 00));
+                t.setLoopPolicy(QuickSetting.everyday());
+                t.setAction(ActionMgr.getIntance().createAction(t.getTimerDef().getID(), 
+                        0, ActionMgr.ACTION_KLAXON,"param1"));
+                t.setAction(ActionMgr.getIntance().createAction(t.getTimerDef().getID(), 
+                        1, ActionMgr.ACTION_DIALOG,"param1"));
                 
-                
-                
-                addTimer(t);
+                MagicTimerActivity.this.addTimer(t);
             }
 
         });
