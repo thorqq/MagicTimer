@@ -130,12 +130,9 @@ public class AdapterTimerItem extends BaseAdapter {
             childViewResource = (Integer)mData.get(position).get("childViewResource");
             visibility = (Integer)mData.get(position).get("visibility");
             
-            if(childViewResource > 0)
-            {
-                holder.childView = mInflater.inflate(childViewResource, null);
-                
-                holder.rLayoutDown.addView(holder.childView);
-            }
+            //×Ó²¼¾Ö
+            holder.childView = mInflater.inflate(childViewResource, null);
+            holder.rLayoutDown.addView(holder.childView);
             
             //¼àÌýÆ÷
             holder.rLayoutTime.setOnClickListener(lstTime);
@@ -149,7 +146,6 @@ public class AdapterTimerItem extends BaseAdapter {
 			holder = (ViewHolder)convertView.getTag();
 		}
 				
-//		holder.time.setTypeface(((MagicTimerApp)mContext.getApplicationContext()).getNumTypeFace());
 		holder.time.setText(Util.formatTwoNumber(timer.getTimerDef().getStartHour()) + 
 		                    ":" + 
 		                    Util.formatTwoNumber(timer.getTimerDef().getStartMinute()) );
