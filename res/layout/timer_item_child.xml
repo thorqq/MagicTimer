@@ -9,43 +9,58 @@
     android:paddingRight="5.0dip"
     android:orientation="horizontal">
 
-	    	    
-    <ImageView
-        android:id="@+id/ImageViewTest"
-        android:src="@drawable/test"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="3.0dip"
-        android:layout_toLeftOf="@+id/TimerItemMoreTest"/>
-    
-    <TextView
-        android:id="@+id/TimerItemMoreTest"
-        android:textSize="16dip"
-        android:text="测试"
-        android:textColor="@drawable/white"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="10.0dip"
-        android:layout_toLeftOf="@+id/ImageViewDelete"/>
-        
-    <ImageView
-        android:id="@+id/ImageViewDelete"
-        android:src="@drawable/delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="3.0dip"
-        android:layout_toLeftOf="@+id/TimerItemMoreDelete"/>
-    
-    <TextView
-        android:id="@+id/TimerItemMoreDelete"
-        android:textSize="16dip"
-        android:text="删除"
-        android:textColor="@drawable/white"
+	<LinearLayout
+    	android:id="@+id/LayoutTest"
+	    android:layout_width="wrap_content"
+	    android:layout_height="fill_parent"
+	    android:layout_toLeftOf="@+id/LayoutDelete"
+	    android:gravity="center"
+	    android:clickable="true"
+	    android:orientation="horizontal">    	    
+		    	
+	    <ImageView
+	        android:id="@+id/ImageViewTest"
+	        android:src="@drawable/test"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginRight="3.0dip"/>
+	    
+	    <TextView
+	        android:id="@+id/TimerItemMoreTest"
+	        android:textSize="16dip"
+	        android:text="测试"
+	        android:textColor="@drawable/white"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_centerVertical="true"
+	        android:layout_marginRight="10.0dip"/>
+    </LinearLayout>
+ 
+	<LinearLayout
+    	android:id="@+id/LayoutDelete"
+	    android:layout_width="wrap_content"
+	    android:layout_height="fill_parent"
         android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+	    android:gravity="center"
+	    android:clickable="true"
+	    android:orientation="horizontal">    	    
+	   
+	    <ImageView
+	        android:id="@+id/ImageViewDelete"
+	        android:src="@drawable/delete"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginRight="3.0dip"/>
+	    
+	    <TextView
+	        android:id="@+id/TimerItemMoreDelete"
+	        android:textSize="16dip"
+	        android:text="删除"
+	        android:textColor="@drawable/white"
+	        android:layout_centerVertical="true"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"/>
 
+    </LinearLayout>
     
 </RelativeLayout>
