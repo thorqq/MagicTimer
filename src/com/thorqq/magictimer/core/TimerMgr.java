@@ -157,7 +157,6 @@ public class TimerMgr
     
     public static void addTimer(Timer t)
     {
-        DBHelper.getIntance().insertTimer(t);
         mTimerArray.add(t);
     }
 

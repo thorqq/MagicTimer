@@ -89,11 +89,11 @@ public class MagicTimerActivity extends Activity implements MsgReceiver
         StatHelper.getInstance(this).printParams();
     }
     
-    public void startTimerSettingActivity(Timer timer)
+    public void startTimerSettingActivity(Timer timer, int request_code)
     {
         Intent i = new Intent(this, SettingActivityTimer.class);
         i.putExtra(TimerMgr.ALARM_INTENT_EXTRA, timer);
-        startActivityForResult(i, REQUEST_CODE_TIMER_SETTING);
+        startActivityForResult(i, request_code);
     }
         
     private void updateLayout()
@@ -122,29 +122,6 @@ public class MagicTimerActivity extends Activity implements MsgReceiver
         mTimerItemAdapter.notifyDataSetChanged(); 
         
     }
-    
-    private void addTimer(Timer t)
-    {
-        //内部结构中新增一个timer，并插入数据库
-        TimerMgr.addTimer(t);
-        
-        //mTimerItemList 要add timer
-        int pos = mTimerItemList.size();
-        HashMap<String, Object> map = new HashMap<String, Object>();
-        map.put("timer", t);
-        
-        map.put("listenerNameInfo", new ListenerNameInfo(this, t));
-        map.put("listenerTime", new ListenerTime(this, t));
-        
-        map.put("childViewResource", R.layout.timer_item_child);
-        map.put("listenerMore", new ListenerMore(this,t, pos));
-        map.put("visibility", View.GONE);
-        
-        mTimerItemList.add(map);
-        TimerMgr.setNextTimer(this, t.getID());
-        mTimerItemAdapter.notifyDataSetChanged(); 
-
-    }
 
     private void registerListener()
     {
@@ -163,7 +140,8 @@ public class MagicTimerActivity extends Activity implements MsgReceiver
                 t.setAction(ActionMgr.getIntance().createAction(t.getTimerDef().getID(), 
                         1, ActionMgr.ACTION_DIALOG,"param1"));
                 
-                MagicTimerActivity.this.addTimer(t);
+                //进入设置界面
+                startTimerSettingActivity(t, REQUEST_CODE_TIMER_SETTING);
             }
 
         });
@@ -327,7 +305,6 @@ public class MagicTimerActivity extends Activity implements MsgReceiver
     };           
 
     //**************************************************************************//
-//    class ListenerTime implements OnCheckedChangeListener 
     class ListenerTime implements OnClickListener 
     {
         private Timer mTimer;
@@ -360,6 +337,7 @@ public class MagicTimerActivity extends Activity implements MsgReceiver
     class ListenerNameInfo implements OnClickListener 
     {
         private Timer mTimer;
+        @SuppressWarnings("unused")
         private Context mContext;
 
         ListenerNameInfo(Context context, Timer timer) 
@@ -371,31 +349,18 @@ public class MagicTimerActivity extends Activity implements MsgReceiver
         @Override
         public void onClick(View v) 
         {
-            Intent i = new Intent(mContext, SettingActivityTimer.class);
-            i.putExtra(TimerMgr.ALARM_INTENT_EXTRA, mTimer);
-            startActivityForResult(i, REQUEST_CODE_TIMER_SETTING);
+            startTimerSettingActivity(mTimer, REQUEST_CODE_TIMER_SETTING);
         }
     }
 
     class ListenerMore implements OnClickListener 
     {
-//        private Timer mTimer;
-//        private Context mContext;
-        
-//        private View mItemView;
         private int mPos = -1;
 
         ListenerMore(Context context, Timer timer, int pos) 
         {
-//            mContext = context;
-//            mTimer = timer;
             mPos = pos;
         }
-        
-//        public void setItemView(View v)
-//        {
-//            mItemView = v;
-//        }
  
         @Override
         public void onClick(View v) 
