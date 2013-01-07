@@ -23,19 +23,15 @@ import android.widget.TextView;
 public class AdapterTimerItem extends BaseAdapter {
 
 	public final class ViewHolder{
-//		public TextView title;
-//		public TextView info;
 		
         public TextView time;
 		public ImageView imageViewToggle;
 		public TextView name_info;
 		public ImageView more;
-		public View childView;
-		public int childVisibility;
 				
-		public LinearLayout rLayoutTime;
-        public LinearLayout rLayoutNameAndInfo;
-        public LinearLayout rLayoutDown;
+		public LinearLayout layoutTime;
+        public LinearLayout layoutNameAndInfo;
+        public LinearLayout layoutDown;
 	}
 
     private LayoutInflater mInflater;
@@ -101,7 +97,7 @@ public class AdapterTimerItem extends BaseAdapter {
 		ViewHolder holder = null;
 		
 		Timer timer = null;
-        int childViewResource = -1;
+		ChildViewInterface childView;
 		ListenerTime     lstTime = null;
 		ListenerNameInfo lstNameInfo = null;
 		ListenerMore     lstMore = null;
@@ -118,25 +114,25 @@ public class AdapterTimerItem extends BaseAdapter {
             holder.name_info = (TextView)convertView.findViewById(R.id.TimerItemNameInfo);
             holder.more      = (ImageView)convertView.findViewById(R.id.TimerItemMore);
             
-            holder.rLayoutTime        = (LinearLayout)convertView.findViewById(R.id.RelativeLayoutTime);
-            holder.rLayoutNameAndInfo = (LinearLayout)convertView.findViewById(R.id.RelativeLayoutNameAndInfo);
-            holder.rLayoutDown        = (LinearLayout)convertView.findViewById(R.id.RelativeLayoutDown);
+            holder.layoutTime        = (LinearLayout)convertView.findViewById(R.id.RelativeLayoutTime);
+            holder.layoutNameAndInfo = (LinearLayout)convertView.findViewById(R.id.RelativeLayoutNameAndInfo);
+            holder.layoutDown        = (LinearLayout)convertView.findViewById(R.id.RelativeLayoutDown);
 
             //传递过来的数据
             timer       = (Timer)mData.get(position).get("timer");
             lstTime     = (ListenerTime)mData.get(position).get("listenerTime");
             lstNameInfo = (ListenerNameInfo)mData.get(position).get("listenerNameInfo");
             lstMore     = (ListenerMore)mData.get(position).get("listenerMore");
-            childViewResource = (Integer)mData.get(position).get("childViewResource");
-            visibility = (Integer)mData.get(position).get("visibility");
+            childView   = (ChildViewInterface)mData.get(position).get("childView");
+            visibility  = (Integer)mData.get(position).get("visibility");
             
             //子布局
-            holder.childView = mInflater.inflate(childViewResource, null);
-            holder.rLayoutDown.addView(holder.childView);
+            childView.initLayout();
+            holder.layoutDown.addView(childView.getLayoutView());
             
             //监听器
-            holder.rLayoutTime.setOnClickListener(lstTime);
-            holder.rLayoutNameAndInfo.setOnClickListener(lstNameInfo);
+            holder.layoutTime.setOnClickListener(lstTime);
+            holder.layoutNameAndInfo.setOnClickListener(lstNameInfo);
             holder.more.setOnClickListener(lstMore);
             
 			convertView.setTag(holder);
@@ -152,7 +148,7 @@ public class AdapterTimerItem extends BaseAdapter {
         holder.name_info.setText(timer.getName() + "\n" + 
                                  Util.MillisToYYYYMMDD(timer.getNextTime()) + " " + 
                                  Util.MillisToHHMM(timer.getNextTime()));
-        holder.rLayoutDown.setVisibility(visibility);
+        holder.layoutDown.setVisibility(visibility);
         
         if(visibility == View.GONE)
         {

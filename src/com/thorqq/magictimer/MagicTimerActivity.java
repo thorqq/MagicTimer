@@ -110,9 +110,9 @@ public class MagicTimerActivity extends Activity implements MsgReceiver
             
             map.put("listenerNameInfo", new ListenerNameInfo(this, t));
             map.put("listenerTime", new ListenerTime(this, t));
-            
-            map.put("childViewResource", R.layout.timer_item_child);
             map.put("listenerMore", new ListenerMore(this,t,i));
+            
+            map.put("childView", new ChildViewTimerItem(this, t));
             map.put("visibility", View.GONE);
             
             mTimerItemList.add(map);
