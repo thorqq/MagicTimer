@@ -17,16 +17,18 @@ public class ChildViewTimerItem implements ChildViewInterface
     private Timer mTimer;
     private Context mContext;
     private LayoutInflater mInflater;
+    private MsgReceiver mMsgReceiver;
     
     private View mLayoutTest;
     private View mLayoutDelete;
     
     private boolean mInitFlag = false;
     
-    public ChildViewTimerItem(Context context, Timer timer)
+    public ChildViewTimerItem(Context context, Timer timer, MsgReceiver msgReceiver)
     {
         mContext = context;
         mTimer = timer;
+        mMsgReceiver = msgReceiver;
     }
 
     @Override
@@ -77,7 +79,21 @@ public class ChildViewTimerItem implements ChildViewInterface
             @Override
             public void onClick(View v)
             {
-                // TODO Auto-generated method stub
+                AlertDialog.Builder builder = new Builder(mContext);
+                builder.setTitle("警告");
+                builder.setMessage("将删除闹钟：" + mTimer.getName());
+                builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        deleteTimer();
+                    }
+                });
+                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                builder.create().show();
 
             }
         });
@@ -94,6 +110,13 @@ public class ChildViewTimerItem implements ChildViewInterface
         return mView;
     }
     
+    private void deleteTimer()
+    {
+        if(mMsgReceiver != null)
+        {
+            mMsgReceiver.getMessage(MsgReceiver.MSG_DELETE_TIMER, mTimer.getID());
+        }
+    }
   
     
 }

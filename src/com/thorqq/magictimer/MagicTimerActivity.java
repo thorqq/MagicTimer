@@ -112,7 +112,7 @@ public class MagicTimerActivity extends Activity implements MsgReceiver
             map.put("listenerTime", new ListenerTime(this, t));
             map.put("listenerMore", new ListenerMore(this,t,i));
             
-            map.put("childView", new ChildViewTimerItem(this, t));
+            map.put("childView", new ChildViewTimerItem(this, t, this));
             map.put("visibility", View.GONE);
             
             mTimerItemList.add(map);
@@ -145,6 +145,25 @@ public class MagicTimerActivity extends Activity implements MsgReceiver
             }
 
         });
+    }
+    
+    public void deleteTimer(int timer_id)
+    {
+        Util.log("delete timer: " + timer_id);
+        
+        TimerMgr.deleteTimer(timer_id);
+        TimerMgr.setNextTimer(this, timer_id);
+        
+        for(int i = 0; i < mTimerItemList.size(); i++)
+        {
+            Timer t = (Timer)mTimerItemList.get(i).get("timer");
+            if(t.getID() == timer_id)
+            {
+                mTimerItemList.remove(i);
+            }
+        }
+        
+        mTimerItemAdapter.notifyDataSetChanged(); 
     }
     
     @Override
@@ -282,8 +301,12 @@ public class MagicTimerActivity extends Activity implements MsgReceiver
                 {
                     displayToastLong((String)msg.obj); 
                 }
-//                else if(MsgReceiver.MSG_UPDATE_TIMER == msg.what)
-//                {
+                else if(MsgReceiver.MSG_DELETE_TIMER == msg.what)
+                {
+                    deleteTimer((Integer)msg.obj);
+                }
+                else if(MsgReceiver.MSG_UPDATE_TIMER == msg.what)
+                {
 //                    updateLayout();
 //                    Timer timer = (Timer)msg.obj;
 //                    if(timer != null)
@@ -294,7 +317,7 @@ public class MagicTimerActivity extends Activity implements MsgReceiver
 //                    {
 //                        mMainTitle.setText("Ã»ÓÐÌáÐÑ");
 //                    }
-//                }
+                }
             }
             catch(Exception e)
             {

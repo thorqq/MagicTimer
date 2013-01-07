@@ -159,6 +159,24 @@ public class TimerMgr
     {
         mTimerArray.add(t);
     }
+    
+    public static void deleteTimer(Timer t)
+    {
+        deleteTimer(t.getID());
+    }
+    
+    public static void deleteTimer(int timer_id)
+    {
+        DBHelper.getIntance().deleteTimer(timer_id);
+        
+        for(int i = 0; i < mTimerArray.size(); i++)
+        {
+            if(mTimerArray.get(i).getID() == timer_id)
+            {
+                mTimerArray.remove(i);
+            }
+        }
+    }
 
     /**
      * 根据id查找定时器
@@ -199,7 +217,7 @@ public class TimerMgr
             //如果定时器的设置没有改变或者只改变了enable，并且当前时间小于该定时器的下一次提醒时间，则可以不重新计算
             if(spec_timer_id == SPEC_TIME_ID_ALL 
                     || t.getID() == spec_timer_id 
-                    || t.getNextTime() <= nowInMillis)
+                    || (t.getNextTime() <= nowInMillis && t.getNextTime() > 0))
             {
                 t.calculate(nowInMillis);
             }
