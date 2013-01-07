@@ -110,7 +110,7 @@ public class MagicTimerActivity extends Activity implements MsgReceiver
             
             map.put("listenerNameInfo", new ListenerNameInfo(this, t));
             map.put("listenerTime", new ListenerTime(this, t));
-            map.put("listenerMore", new ListenerMore(this,t,i));
+            map.put("listenerMore", new ListenerMore(this,t));
             
             map.put("childView", new ChildViewTimerItem(this, t, this));
             map.put("visibility", View.GONE);
@@ -378,11 +378,11 @@ public class MagicTimerActivity extends Activity implements MsgReceiver
 
     class ListenerMore implements OnClickListener 
     {
-        private int mPos = -1;
+        private Timer mTimer;
 
-        ListenerMore(Context context, Timer timer, int pos) 
+        ListenerMore(Context context, Timer timer) 
         {
-            mPos = pos;
+            mTimer = timer;
         }
  
         @Override
@@ -390,15 +390,16 @@ public class MagicTimerActivity extends Activity implements MsgReceiver
         {
             for(int i = 0; i < mTimerItemList.size(); i++)
             {
-                if(i == mPos)
+                Timer timer = (Timer)mTimerItemList.get(i).get("timer");
+                if(timer.getID() == mTimer.getID())
                 {
-                    if((Integer)mTimerItemList.get(mPos).get("visibility") == View.VISIBLE)
+                    if((Integer)mTimerItemList.get(i).get("visibility") == View.VISIBLE)
                     {
-                        mTimerItemList.get(mPos).put("visibility", View.GONE);
+                        mTimerItemList.get(i).put("visibility", View.GONE);
                     }
                     else
                     {
-                        mTimerItemList.get(mPos).put("visibility", View.VISIBLE);
+                        mTimerItemList.get(i).put("visibility", View.VISIBLE);
                     }
                 }
                 else
