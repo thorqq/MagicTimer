@@ -105,7 +105,7 @@ public class SettingActivityTimer extends Activity
         mActionListView.setDivider(this.getResources().getDrawable(R.drawable.gradient_shape_hor));
         mActionListView.setDividerHeight(1);
         
-        mActionItemHeader = getLayoutInflater().inflate(R.layout.timing_action_item_header, null);
+        mActionItemHeader = getLayoutInflater().inflate(R.layout.action_item_header, null);
         mActionListView.addHeaderView(mActionItemHeader);
         mBtnAddAction = (Button) mActionItemHeader.findViewById(R.id.btnAddAction);
         

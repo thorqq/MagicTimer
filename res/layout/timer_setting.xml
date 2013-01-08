@@ -22,7 +22,7 @@
 			android:paddingRight="4.0dip"
             android:orientation="vertical" >
             
-   			<include layout="@layout/time_setting_header" />
+   			<include layout="@layout/timedef_setting_header" />
 
             
             <LinearLayout
@@ -30,7 +30,7 @@
 		        android:layout_height="1.0dip"
 		        android:background="@drawable/gradient_shape_hor"/>
 		        
-			<include layout="@layout/time_setting_time" />
+			<include layout="@layout/timedef_setting_body" />
 
 
 			

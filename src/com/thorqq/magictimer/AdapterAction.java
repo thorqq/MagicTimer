@@ -92,7 +92,7 @@ public class AdapterAction extends BaseAdapter
         {
             holder = new ViewHolder();
 
-            convertView = mInflater.inflate(R.layout.timing_action_item, null);
+            convertView = mInflater.inflate(R.layout.action_item, null);
             holder.actionDetail = (TextView) convertView.findViewById(R.id.btnActionDetail);
             holder.deleteAction = (Button) convertView.findViewById(R.id.btnDeleteAction);
             convertView.setTag(holder);
