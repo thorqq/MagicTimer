@@ -33,6 +33,37 @@ public class ChildViewTimerItem implements ChildViewInterface
     }
 
     @Override
+    public View getLayoutView()
+    {
+        if(mInitFlag == false)
+        {
+            initLayout();
+        }
+        return mView;
+    }
+
+    @Override
+    public void updateLayout()
+    {
+        if(mInitFlag == false)
+        {
+            initLayout();
+        }
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void updateData()
+    {
+        if(mInitFlag == false)
+        {
+            initLayout();
+        }
+        // TODO Auto-generated method stub
+    }
+
+    @Override
     public void initLayout()
     {
         mInflater = LayoutInflater.from(mContext);
@@ -41,27 +72,12 @@ public class ChildViewTimerItem implements ChildViewInterface
         mLayoutTest   = (LinearLayout)mView.findViewById(R.id.LayoutTest);
         mLayoutDelete = (LinearLayout)mView.findViewById(R.id.LayoutDelete);
         
-        updateLayout();
-        registerListener();
+        registerListener();     
         
         mInitFlag = true;
     }
 
-    @Override
-    public void updateLayout()
-    {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void updateData()
-    {
-        // TODO Auto-generated method stub
-    }
-
-    @Override
-    public void registerListener()
+    private void registerListener()
     {
         mLayoutTest.setOnClickListener(new View.OnClickListener()
         {
@@ -98,16 +114,6 @@ public class ChildViewTimerItem implements ChildViewInterface
 
     }
 
-    @Override
-    public View getLayoutView()
-    {
-        if(mInitFlag == false)
-        {
-            initLayout();
-        }
-        return mView;
-    }
-    
     private void deleteTimer()
     {
         if(mMsgReceiver != null)
