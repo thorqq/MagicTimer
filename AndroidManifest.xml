@@ -70,7 +70,7 @@
         <activity
             android:configChanges="keyboard|keyboardHidden|navigation|orientation"
             android:excludeFromRecents="true"
-            android:name=".SettingActivityTime"
+            android:name=".SettingActivityTimeDef"
             android:taskAffinity=""
             android:theme="@style/common_dialog" />
         <activity

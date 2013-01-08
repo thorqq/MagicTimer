@@ -18,7 +18,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
-public class SettingActivityTime extends Activity
+public class SettingActivityTimeDef extends Activity
 {
     private TTimerDef mTimerDef;
     private TimePicker mTimePicker;

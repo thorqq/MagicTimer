@@ -280,7 +280,7 @@ public class SettingActivityTimer extends Activity
 
     private void startTimerSettingActivity(Timer timer)
     {
-        Intent i = new Intent(this, SettingActivityTime.class);
+        Intent i = new Intent(this, SettingActivityTimeDef.class);
         i.putExtra(TimerMgr.ALARM_INTENT_TIMER_DEF, timer.getTimerDef());
         startActivityForResult(i, REQUEST_CODE_TIME_SETTING);
     }
