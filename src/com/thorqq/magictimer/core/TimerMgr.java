@@ -149,7 +149,6 @@ public class TimerMgr
             }
 
             mTimerArray.add(timer);
-            Util.log("Found new timer: " + timer.getID() + ". " + timer.getName());
         }
 
         return mTimerArray;
@@ -217,10 +216,12 @@ public class TimerMgr
             //如果定时器的设置没有改变或者只改变了enable，并且当前时间小于该定时器的下一次提醒时间，则可以不重新计算
             if(spec_timer_id == SPEC_TIME_ID_ALL 
                     || t.getID() == spec_timer_id 
-                    || (t.getNextTime() <= nowInMillis && t.getNextTime() > 0))
+                    || t.getNextTime() <= nowInMillis)
             {
                 t.calculate(nowInMillis);
             }
+            
+            Util.log(t.getID() + ". " + t.getName() + ": " + Util.MillisToStr(t.getNextTime()));
             
             //如果闹钟已经结束，则需要清空LastAlertTime
             if(t.getNextTime() == 0 && t.getTimerDef().getLastAlertTime() > 0)
