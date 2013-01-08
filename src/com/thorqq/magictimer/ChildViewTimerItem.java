@@ -1,5 +1,6 @@
 package com.thorqq.magictimer;
 
+import com.thorqq.magictimer.action.ActionMgr;
 import com.thorqq.magictimer.core.Timer;
 
 import android.app.AlertDialog;
@@ -64,18 +65,15 @@ public class ChildViewTimerItem implements ChildViewInterface
     {
         mLayoutTest.setOnClickListener(new View.OnClickListener()
         {
-            
             @Override
             public void onClick(View v)
             {
-                // TODO Auto-generated method stub
-                
+                ActionMgr.getIntance().run(mContext, mTimer);                
             }
         });
 
         mLayoutDelete.setOnClickListener(new View.OnClickListener()
         {
-            
             @Override
             public void onClick(View v)
             {
