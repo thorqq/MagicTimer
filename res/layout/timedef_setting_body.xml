@@ -41,22 +41,22 @@
 	        	
 	    </LinearLayout>
     </LinearLayout>
-    
+
     <LinearLayout
-        android:id="@+id/RelativeLayoutTimeSettingTimeDown"
+        android:id="@+id/LayoutTimeDefSettingDown"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/RelativeLayoutUp"
-    	android:background="@drawable/timer_item_child_bg"
+        android:layout_below="@+id/RelativeLayoutTimeSettingTimeUp"
         android:visibility="gone"
         android:orientation="vertical">
 	    
-	    <RelativeLayout
-	        android:id="@+id/RelativeLayoutDividerTimeSettingTime"
+	    <LinearLayout
+	        android:id="@+id/RelativeLayoutDivider_3"
 	        android:layout_width="fill_parent"
 	        android:layout_height="1.0dip"
 	        android:background="@drawable/gradient_shape_hor"/>
 
     </LinearLayout>
+    
     
 </RelativeLayout>
