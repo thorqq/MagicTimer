@@ -21,14 +21,6 @@
             android:gravity="center"
             android:singleLine="true" />
 
-        <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="1.0dip"
-            android:layout_marginLeft="10.0dip"
-            android:layout_marginRight="10.0dip"
-            android:gravity="fill_horizontal"
-            android:scaleType="fitXY"
-            android:src="@drawable/btn_keyboard_key_fulltrans_pressed_on" />
 
         <LinearLayout
             android:id="@id/clockView"
