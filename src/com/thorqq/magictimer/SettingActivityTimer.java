@@ -37,6 +37,8 @@ public class SettingActivityTimer extends Activity
     private LinearLayout mLayoutTime;
     private TextView mTvTime;
     private TextView mTvName;
+    private LinearLayout mLayoutTimeDefDown;
+    private ChildViewTimeDef mChildViewTimeDef;
     
     //policy
     private Button mBtnAddLoopPolicy;
@@ -79,7 +81,10 @@ public class SettingActivityTimer extends Activity
         //time
         mTvTime = (TextView) findViewById(R.id.tvTime);
         mLayoutTime = (LinearLayout) findViewById(R.id.LinearLayoutTimeSettingTime);
+        mLayoutTimeDefDown = (LinearLayout) findViewById(R.id.LayoutTimeDefSettingDown);
         mTvTime.setTypeface(((MagicTimerApp)getApplicationContext()).getNumTypeFace());
+        mChildViewTimeDef = new ChildViewTimeDef(this, mTimer);
+        mLayoutTimeDefDown.addView(mChildViewTimeDef.getLayoutView());
         
         //name
         mTvName = (TextView) findViewById(R.id.tvName);
@@ -179,7 +184,15 @@ public class SettingActivityTimer extends Activity
             {
                 Util.log("mLayoutTime onClick");
                 // 弹出启动时间设置界面
-                startTimerSettingActivity(mTimer);
+//                startTimerSettingActivity(mTimer);
+                if(mLayoutTimeDefDown.getVisibility() == View.GONE)
+                {
+                    mLayoutTimeDefDown.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    mLayoutTimeDefDown.setVisibility(View.GONE);
+                }
             }
 
         });
