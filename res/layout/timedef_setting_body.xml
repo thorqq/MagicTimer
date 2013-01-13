@@ -48,6 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/RelativeLayoutTimeSettingTimeUp"
         android:visibility="gone"
+    	android:background="@drawable/timer_item_child_bg"
         android:orientation="vertical">
 	    
 	    <LinearLayout
