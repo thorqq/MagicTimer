@@ -137,6 +137,7 @@ public class AdapterTimeDef extends BaseAdapter
         holder.name.setText(timedef.getName());
         holder.layoutDown.setVisibility(visibility);
                 
-        return convertView;    }
+        return convertView;    
+    }
 
 }
