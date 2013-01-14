@@ -107,7 +107,7 @@ public class ChildViewTimeDef implements ChildViewInterface
     {
         Util.log("init ChildViewTimeDef");
         mInflater = LayoutInflater.from(mContext);
-        mView = mInflater.inflate(R.layout.timedef_setting_child, null);
+        mView = mInflater.inflate(R.layout.timedef_item_child, null);
         
         mTimePicker = (TimePicker) mView.findViewById(R.id.timePicker);
         mEtMaxCount = (EditText) mView.findViewById(R.id.editTextMaxCount);

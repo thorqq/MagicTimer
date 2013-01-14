@@ -22,8 +22,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 public class SettingActivityTimer extends Activity
 {
@@ -34,11 +32,16 @@ public class SettingActivityTimer extends Activity
     private Timer mTimer;
 
     //time & name
-    private LinearLayout mLayoutTime;
-    private TextView mTvTime;
-    private TextView mTvName;
-    private LinearLayout mLayoutTimeDefDown;
-    private ChildViewTimeDef mChildViewTimeDef;
+    private ArrayList<Map<String, Object>> mTimeDefList = new ArrayList<Map<String, Object>>();
+    private AdapterTimeDef mTimeDefAdapter;
+    private ListViewNoScroll mTimeDefListView;
+    private View mTimeDefItemHeader;
+
+//    private LinearLayout mLayoutTime;
+//    private TextView mTvTime;
+//    private TextView mTvName;
+//    private LinearLayout mLayoutTimeDefDown;
+//    private ChildViewTimeDef mChildViewTimeDef;
     
     //policy
     private Button mBtnAddLoopPolicy;
@@ -79,15 +82,24 @@ public class SettingActivityTimer extends Activity
     private void initLayout()
     {
         //time
-        mTvTime = (TextView) findViewById(R.id.tvTime);
-        mLayoutTime = (LinearLayout) findViewById(R.id.LinearLayoutTimeSettingTime);
-        mLayoutTimeDefDown = (LinearLayout) findViewById(R.id.LayoutTimeDefSettingDown);
-        mTvTime.setTypeface(((MagicTimerApp)getApplicationContext()).getNumTypeFace());
-        mChildViewTimeDef = new ChildViewTimeDef(this, mTimer);
-        mLayoutTimeDefDown.addView(mChildViewTimeDef.getLayoutView());
+        mTimeDefListView = (ListViewNoScroll)findViewById(R.id.ListViewNoScrollTimeDef);
+        mTimeDefAdapter = new AdapterTimeDef(this, mTimeDefList);
+        mTimeDefListView.setAdapter(mTimeDefAdapter);
+        mTimeDefListView.setDivider(this.getResources().getDrawable(R.drawable.gradient_shape_hor));
+        mTimeDefListView.setDividerHeight(1);
         
-        //name
-        mTvName = (TextView) findViewById(R.id.tvName);
+        mTimeDefItemHeader = getLayoutInflater().inflate(R.layout.timedef_item_header, null);
+        mTimeDefListView.addHeaderView(mTimeDefItemHeader);
+
+//        mTvTime = (TextView) findViewById(R.id.tvTime);
+//        mLayoutTime = (LinearLayout) findViewById(R.id.LinearLayoutTimeSettingTime);
+//        mLayoutTimeDefDown = (LinearLayout) findViewById(R.id.LayoutTimeDefSettingDown);
+//        mTvTime.setTypeface(((MagicTimerApp)getApplicationContext()).getNumTypeFace());
+//        mChildViewTimeDef = new ChildViewTimeDef(this, mTimer);
+//        mLayoutTimeDefDown.addView(mChildViewTimeDef.getLayoutView());
+//        
+//        //name
+//        mTvName = (TextView) findViewById(R.id.tvName);
                 
         //循环策略
         mLoopPolicyListView = (ListViewNoScroll)findViewById(R.id.ListViewNoScrollLoopPolicy);
@@ -133,12 +145,23 @@ public class SettingActivityTimer extends Activity
     
     private void updateTimerDefLayout()
     {
-        //time
-        mTvTime.setText(mTimer.getTimerDef().getDescription() + " ");
-        //name
-        mTvName.setText(mTimer.getName());
-        //child
-        mChildViewTimeDef.updateLayout();
+        //TODO
+//        //time
+//        mTvTime.setText(mTimer.getTimerDef().getDescription() + " ");
+//        //name
+//        mTvName.setText(mTimer.getName());
+//        //child
+//        mChildViewTimeDef.updateLayout();
+        mTimeDefList.clear();
+        
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("timedef", mTimer.getTimerDef());
+        map.put("listener", new TimeDefButtonListener(this, mTimer.getTimerDef()));        
+        map.put("childView", new ChildViewTimeDef(this, mTimer));
+        map.put("visibility", View.GONE);
+        mTimeDefList.add(map);
+
+        mTimeDefAdapter.notifyDataSetChanged();        
     }
 
     private void updateActionLayout()
@@ -179,27 +202,27 @@ public class SettingActivityTimer extends Activity
 
     private void registerListener()
     {
-        // 启动时间设置
-        mLayoutTime.setOnClickListener(new LinearLayout.OnClickListener()
-        {
-            public void onClick(View v)
-            {
-                Util.log("mLayoutTime onClick");
-                // 弹出启动时间设置界面
-//                startTimerSettingActivity(mTimer);
-                if(mLayoutTimeDefDown.getVisibility() == View.GONE)
-                {
-                    mLayoutTimeDefDown.setVisibility(View.VISIBLE);
-                }
-                else
-                {
-                    mChildViewTimeDef.updateData();
-                    updateTimerDefLayout();
-                    mLayoutTimeDefDown.setVisibility(View.GONE);
-                }
-            }
-
-        });
+        //TODO
+//        // 启动时间设置
+//        mLayoutTime.setOnClickListener(new LinearLayout.OnClickListener()
+//        {
+//            public void onClick(View v)
+//            {
+//                Util.log("mLayoutTime onClick");
+//                // 弹出启动时间设置界面
+//                if(mLayoutTimeDefDown.getVisibility() == View.GONE)
+//                {
+//                    mLayoutTimeDefDown.setVisibility(View.VISIBLE);
+//                }
+//                else
+//                {
+//                    mChildViewTimeDef.updateData();
+//                    updateTimerDefLayout();
+//                    mLayoutTimeDefDown.setVisibility(View.GONE);
+//                }
+//            }
+//
+//        });
 
         // 新增循环策略
         mBtnAddLoopPolicy.setOnClickListener(new Button.OnClickListener()
@@ -229,13 +252,14 @@ public class SettingActivityTimer extends Activity
         {
             public void onClick(View v)
             {
-                if(mTvName.getText().length() == 0)
-                {
-                    displayValidDialog("请输入闹钟名称");
-                    return;
-                }
-                
-                mTimer.setName(mTvName.getText().toString());
+                //TODO
+//                if(mTvName.getText().length() == 0)
+//                {
+//                    displayValidDialog("请输入闹钟名称");
+//                    return;
+//                }
+//                
+//                mTimer.setName(mTvName.getText().toString());
                 
                 //循环策略
                 mTimer.getLoopPolicys().clear();
@@ -331,7 +355,38 @@ public class SettingActivityTimer extends Activity
         }
     }
 
-    ///////////////
+    //////////////////////////////////////////////////////////////////
+    class TimeDefButtonListener implements OnClickListener 
+    {
+        private TTimerDef mTimerDef;
+        private Context mContext;
+
+        TimeDefButtonListener(Context context, TTimerDef timedef) 
+        {
+            mContext = context;
+            mTimerDef = timedef;
+        }
+        
+        @Override
+        public void onClick(View v) 
+        {
+            Util.log("Click timedef" );
+            
+            if((Integer)mTimeDefList.get(0).get("visibility") == View.VISIBLE)
+            {
+                mTimeDefList.get(0).put("visibility", View.GONE);
+            }
+            else
+            {
+                mTimeDefList.get(0).put("visibility", View.VISIBLE);
+            }
+
+            mTimeDefAdapter.notifyDataSetChanged(); 
+            
+        }
+    }
+    
+    
     class LoopPolicyButtonListener implements OnClickListener 
     {
         private TLoopPolicy mPolicy;

@@ -22,18 +22,14 @@
 			android:paddingRight="4.0dip"
             android:orientation="vertical" >
             
-   			<include layout="@layout/timedef_setting_header" />
-
+            <com.thorqq.magictimer.ListViewNoScroll
+                android:id="@+id/ListViewNoScrollTimeDef"
+                android:orientation="vertical" 
+                android:layout_marginTop="8.0dip"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+            </com.thorqq.magictimer.ListViewNoScroll>
             
-            <LinearLayout
-		        android:layout_width="fill_parent"
-		        android:layout_height="1.0dip"
-		        android:background="@drawable/gradient_shape_hor"/>
-		        
-			<include layout="@layout/timedef_setting_body" />
-
-
-			
             <com.thorqq.magictimer.ListViewNoScroll
                 android:id="@+id/ListViewNoScrollLoopPolicy"
                 android:orientation="vertical" 
