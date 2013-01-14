@@ -137,6 +137,8 @@ public class SettingActivityTimer extends Activity
         mTvTime.setText(mTimer.getTimerDef().getDescription() + " ");
         //name
         mTvName.setText(mTimer.getName());
+        //child
+        mChildViewTimeDef.updateLayout();
     }
 
     private void updateActionLayout()
@@ -191,6 +193,8 @@ public class SettingActivityTimer extends Activity
                 }
                 else
                 {
+                    mChildViewTimeDef.updateData();
+                    updateTimerDefLayout();
                     mLayoutTimeDefDown.setVisibility(View.GONE);
                 }
             }
@@ -288,12 +292,12 @@ public class SettingActivityTimer extends Activity
 
     }
 
-    private void startTimerSettingActivity(Timer timer)
-    {
-        Intent i = new Intent(this, SettingActivityTimeDef.class);
-        i.putExtra(TimerMgr.ALARM_INTENT_TIMER_DEF, timer.getTimerDef());
-        startActivityForResult(i, REQUEST_CODE_TIME_SETTING);
-    }
+//    private void startTimerSettingActivity(Timer timer)
+//    {
+//        Intent i = new Intent(this, SettingActivityTimeDef.class);
+//        i.putExtra(TimerMgr.ALARM_INTENT_TIMER_DEF, timer.getTimerDef());
+//        startActivityForResult(i, REQUEST_CODE_TIME_SETTING);
+//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
