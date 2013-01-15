@@ -21,9 +21,11 @@ public class AdapterTimeDef extends BaseAdapter
 
     public final class ViewHolder
     {
+        public ChildViewInterface childView = null;
+        public int visibility = View.GONE;;
+
         public TextView time;
         public TextView name;
-                
         public LinearLayout layoutUp;
         public LinearLayout layoutDown;
     }
@@ -98,9 +100,7 @@ public class AdapterTimeDef extends BaseAdapter
         ViewHolder holder = null;
         
         TTimerDef timedef = null;
-        ChildViewInterface childView = null;
         TimeDefButtonListener     lster = null;
-        int visibility = View.GONE;
         
         if (convertView == null) 
         {
@@ -118,14 +118,12 @@ public class AdapterTimeDef extends BaseAdapter
             holder.layoutDown        = (LinearLayout)convertView.findViewById(R.id.LayoutTimeDefSettingDown);
 
             //传递过来的数据
-            timedef     = (TTimerDef)mData.get(position).get("timedef");
             lster       = (TimeDefButtonListener)mData.get(position).get("listener");
-            childView   = (ChildViewInterface)mData.get(position).get("childView");
-            visibility  = (Integer)mData.get(position).get("visibility");
+            holder.childView   = (ChildViewInterface)mData.get(position).get("childView");
             
             //子布局
-            childView.initLayout();
-            holder.layoutDown.addView(childView.getLayoutView());
+            holder.childView.initLayout();
+            holder.layoutDown.addView(holder.childView.getLayoutView());
             
             //监听器
             holder.layoutUp.setOnClickListener(lster);
@@ -137,10 +135,13 @@ public class AdapterTimeDef extends BaseAdapter
             holder = (ViewHolder)convertView.getTag();
         }
                 
+        timedef = (TTimerDef)mData.get(position).get("timedef");
+        holder.visibility  = (Integer)mData.get(position).get("visibility");
+
         holder.time.setText(timedef.getDescription() + " ");
         holder.name.setText(timedef.getName());
-        holder.layoutDown.setVisibility(visibility);
-        childView.updateLayout();
+        holder.layoutDown.setVisibility(holder.visibility);
+        holder.childView.updateLayout();
                 
         return convertView;    
     }
