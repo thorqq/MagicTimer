@@ -61,6 +61,7 @@ public class ListViewNoScroll extends LinearLayout
         int count = mAdapter.getCount();
         if(mCacheView.size() != count)
         {
+            //TODO 全部清掉太粗暴了
             mCacheView.clear();
         }
         
