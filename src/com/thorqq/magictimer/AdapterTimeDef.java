@@ -6,6 +6,8 @@ import java.util.Map;
 
 import com.thorqq.magictimer.SettingActivityTimer.TimeDefButtonListener;
 import com.thorqq.magictimer.core.TTimerDef;
+import com.thorqq.magictimer.util.Util;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -96,12 +98,14 @@ public class AdapterTimeDef extends BaseAdapter
         ViewHolder holder = null;
         
         TTimerDef timedef = null;
-        ChildViewInterface childView;
+        ChildViewInterface childView = null;
         TimeDefButtonListener     lster = null;
         int visibility = View.GONE;
         
         if (convertView == null) 
         {
+            Util.log(this.getClass().getName() + ":getView init view " + position);
+            
             holder=new ViewHolder();  
             
             //²¼¾Ö
@@ -136,6 +140,7 @@ public class AdapterTimeDef extends BaseAdapter
         holder.time.setText(timedef.getDescription() + " ");
         holder.name.setText(timedef.getName());
         holder.layoutDown.setVisibility(visibility);
+        childView.updateLayout();
                 
         return convertView;    
     }
