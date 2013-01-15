@@ -24,6 +24,10 @@ public class AdapterTimerItem extends BaseAdapter {
 
 	public final class ViewHolder{
 		
+        Timer timer;
+        ChildViewInterface childView;
+        int visibility = View.GONE;
+
         public TextView time;
 		public ImageView imageViewToggle;
 		public TextView name_info;
@@ -96,16 +100,14 @@ public class AdapterTimerItem extends BaseAdapter {
 	{
 		ViewHolder holder = null;
 		
-		Timer timer = null;
-		ChildViewInterface childView;
 		ListenerTime     lstTime = null;
 		ListenerNameInfo lstNameInfo = null;
 		ListenerMore     lstMore = null;
-		int visibility = View.GONE;
         
 		if (convertView == null) 
 		{
-			holder=new ViewHolder();  
+            Util.log(this.getClass().getName() + ":getView init view " + position);
+			holder = new ViewHolder();  
 			
 			//布局
 			convertView = mInflater.inflate(R.layout.timer_item, null);
@@ -118,17 +120,16 @@ public class AdapterTimerItem extends BaseAdapter {
             holder.layoutNameAndInfo = (LinearLayout)convertView.findViewById(R.id.RelativeLayoutNameAndInfo);
             holder.layoutDown        = (LinearLayout)convertView.findViewById(R.id.RelativeLayoutDown);
 
-            //传递过来的数据
-            timer       = (Timer)mData.get(position).get("timer");
+            //传递过来的数据            
             lstTime     = (ListenerTime)mData.get(position).get("listenerTime");
             lstNameInfo = (ListenerNameInfo)mData.get(position).get("listenerNameInfo");
             lstMore     = (ListenerMore)mData.get(position).get("listenerMore");
-            childView   = (ChildViewInterface)mData.get(position).get("childView");
-            visibility  = (Integer)mData.get(position).get("visibility");
             
+
             //子布局
-            childView.initLayout();
-            holder.layoutDown.addView(childView.getLayoutView());
+            holder.childView = (ChildViewInterface)mData.get(position).get("childView");
+            holder.childView.initLayout();
+            holder.layoutDown.addView(holder.childView.getLayoutView());
             
             //监听器
             holder.layoutTime.setOnClickListener(lstTime);
@@ -142,24 +143,27 @@ public class AdapterTimerItem extends BaseAdapter {
 			holder = (ViewHolder)convertView.getTag();
 		}
 				
-		holder.time.setText(Util.formatTwoNumber(timer.getTimerDef().getStartHour()) + 
+        holder.visibility  = (Integer)mData.get(position).get("visibility");
+        holder.timer       = (Timer)mData.get(position).get("timer");
+
+        holder.time.setText(Util.formatTwoNumber(holder.timer.getTimerDef().getStartHour()) + 
 		                    ":" + 
-		                    Util.formatTwoNumber(timer.getTimerDef().getStartMinute()) );
-        holder.name_info.setText(timer.getName() + "\n" + 
-                                 Util.MillisToYYYYMMDD(timer.getNextTime()) + " " + 
-                                 Util.MillisToHHMM(timer.getNextTime()));
-        holder.layoutDown.setVisibility(visibility);
+		                    Util.formatTwoNumber(holder.timer.getTimerDef().getStartMinute()) );
+        holder.name_info.setText(holder.timer.getName() + "\n" + 
+                                 Util.MillisToYYYYMMDD(holder.timer.getNextTime()) + " " + 
+                                 Util.MillisToHHMM(holder.timer.getNextTime()));
+        holder.layoutDown.setVisibility(holder.visibility);
         
-        if(visibility == View.GONE)
+        if(holder.visibility == View.GONE)
         {
             holder.more.setImageResource(R.drawable.btn_more_selector);
         }
-        else if(visibility == View.VISIBLE)
+        else if(holder.visibility == View.VISIBLE)
         {
             holder.more.setImageResource(R.drawable.btn_more_down_selector);
         }
         
-        if(timer.getTimerDef().isEnable() == 0)
+        if(holder.timer.getTimerDef().isEnable() == 0)
         {
             holder.time.setTextColor(Color.GRAY);
             holder.name_info.setTextColor(Color.GRAY);

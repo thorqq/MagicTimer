@@ -1,6 +1,8 @@
 package com.thorqq.magictimer;
 
 
+import java.util.ArrayList;
+
 import android.content.Context;
 import android.database.DataSetObserver;
 import android.graphics.Canvas;
@@ -9,6 +11,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 
 //无滚动效果的简易ListView
@@ -30,11 +33,11 @@ public class ListViewNoScroll extends LinearLayout
         {
             mView = v;
         }
-        
+                
         ListViewNoScroll mView;
     } 
     
-    private android.widget.BaseAdapter mAdapter;
+    private BaseAdapter mAdapter;
     private OnClickListener onClickListener = null;
     AdapterDataSetObserver mDataSetObserver;
     private Drawable mDivider;
@@ -43,6 +46,8 @@ public class ListViewNoScroll extends LinearLayout
     
     private View mHeaderView;
     private View mFooterView;
+    
+    private ArrayList<View> mCacheView = new ArrayList<View>();
             
     public void fillLinearLayout()
     {
@@ -54,9 +59,29 @@ public class ListViewNoScroll extends LinearLayout
         }
         
         int count = mAdapter.getCount();
+        if(mCacheView.size() != count)
+        {
+            mCacheView.clear();
+        }
+        
         for (int i = 0; i < count; i++)
         {
-            View v = mAdapter.getView(i, null, null);
+            View srcView = null;
+            if(mCacheView.size() > i)
+            {
+                srcView = mCacheView.get(i);
+            }
+            
+            View v = mAdapter.getView(i, srcView, null);
+            if(mCacheView.size() > i)
+            {
+                mCacheView.set(i, v);
+            }
+            else
+            {
+                mCacheView.add(v);
+            }
+            
             v.setOnClickListener(this.onClickListener);
             addView(v);
         }
