@@ -58,6 +58,7 @@ public class SettingActivityTimer extends Activity
     private View mActionItemHeader;
 
     //save & cancel
+    private View mLayoutBotton;
     private Button mBtnSave;
     private Button mBtnCancel;
 
@@ -73,6 +74,7 @@ public class SettingActivityTimer extends Activity
             Util.log("mTimer is null");
             return;
         }
+        Util.log("SettingActivityTimer.onCreate:" + mTimer.getTimerDef().getDescription() + " " + mTimer.getTimerDef().getName());
 
         initLayout();
         updateLayout();
@@ -124,6 +126,7 @@ public class SettingActivityTimer extends Activity
         mBtnAddAction = (Button) mActionItemHeader.findViewById(R.id.btnAddAction);
         
         //
+        mLayoutBotton = (View) findViewById(R.id.linearLayoutBottom);
         mBtnSave = (Button) findViewById(R.id.btnSave);
         mBtnCancel = (Button) findViewById(R.id.btnCancel);
     }
@@ -180,6 +183,7 @@ public class SettingActivityTimer extends Activity
     
     private void updateLayout()
     {        
+        Util.log("SettingActivityTimer.updateLayout");
         updateTimerDefLayout();
         updatePolicyLayout();
         updateActionLayout();
@@ -375,10 +379,12 @@ public class SettingActivityTimer extends Activity
             if((Integer)mTimeDefList.get(0).get("visibility") == View.VISIBLE)
             {
                 mTimeDefList.get(0).put("visibility", View.GONE);
+//                mLayoutBotton.setVisibility(View.VISIBLE);
             }
             else
             {
                 mTimeDefList.get(0).put("visibility", View.VISIBLE);
+//                mLayoutBotton.setVisibility(View.GONE);
             }
 
             mTimeDefAdapter.notifyDataSetChanged(); 

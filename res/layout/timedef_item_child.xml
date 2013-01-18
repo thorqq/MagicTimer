@@ -2,84 +2,91 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="5.0dip"
-    android:paddingLeft="8.0dip"
-    android:paddingRight="8.0dip"
-    android:paddingTop="5.0dip" 
     android:orientation="vertical" >
 
-    <RelativeLayout
-        android:id="@+id/linearLayoutStartTime"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
-
-        <TextView
-            android:id="@+id/textViewStartTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="启动时刻" />
-
-        <TimePicker
-            android:id="@+id/timePicker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/textViewStartTime" />
-    </RelativeLayout>
-
-    <TableLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:shrinkColumns="1"
-        android:stretchColumns="1" >
-
-        <TableRow
-            android:id="@+id/linearLayoutMaxCount"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" >
-
-            <TextView
-                android:id="@+id/textViewMaxCount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="重复次数" />
-
-            <EditText
-                android:id="@+id/editTextMaxCount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="numberSigned" />
-
-            <CheckBox
-                android:id="@+id/checkBoxInfinity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="不限" />
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/linearLayoutInterval"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" >
-
-            <TextView
-                android:id="@+id/textViewInterval"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="间隔时长" />
-
-            <EditText
-                android:id="@+id/editTextInterval"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="number" />
-
-            <TextView
-                android:id="@+id/textView1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="分钟" />
-        </TableRow>
-    </TableLayout>
-
+	<LinearLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+    	android:background="@drawable/timer_item_child_bg"
+	    android:paddingBottom="5.0dip"
+	    android:paddingLeft="8.0dip"
+	    android:paddingRight="8.0dip"
+	    android:paddingTop="5.0dip" 
+	    android:orientation="vertical" >
+	    	    	        
+	    <RelativeLayout
+	        android:id="@+id/linearLayoutStartTime"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content" >
+	
+	        <TextView
+	            android:id="@+id/textViewStartTime"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_centerVertical="true"
+	            android:text="启动时刻" />
+	
+	        <TimePicker
+	            android:id="@+id/timePicker"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_toRightOf="@+id/textViewStartTime" />
+	    </RelativeLayout>
+	
+	    <TableLayout
+	        android:layout_width="fill_parent"
+	        android:layout_height="fill_parent"
+	        android:shrinkColumns="1"
+	        android:stretchColumns="1" >
+	
+	        <TableRow
+	            android:id="@+id/linearLayoutMaxCount"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content" >
+	
+	            <TextView
+	                android:id="@+id/textViewMaxCount"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:text="重复次数" />
+	
+	            <EditText
+	                android:id="@+id/editTextMaxCount"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:inputType="numberSigned" />
+	
+	            <CheckBox
+	                android:id="@+id/checkBoxInfinity"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:text="不限" />
+	        </TableRow>
+	
+	        <TableRow
+	            android:id="@+id/linearLayoutInterval"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content" >
+	
+	            <TextView
+	                android:id="@+id/textViewInterval"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:text="间隔时长" />
+	
+	            <EditText
+	                android:id="@+id/editTextInterval"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:inputType="number" />
+	
+	            <TextView
+	                android:id="@+id/textView1"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:text="分钟" />
+	        </TableRow>
+	    </TableLayout>
+	</LinearLayout>
+        
 </LinearLayout>

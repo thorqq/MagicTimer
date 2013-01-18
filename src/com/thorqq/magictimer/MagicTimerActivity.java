@@ -179,6 +179,7 @@ public class MagicTimerActivity extends Activity implements MsgReceiver
         {
         case REQUEST_CODE_TIMER_SETTING:            
             Timer timer = data.getParcelableExtra(TimerMgr.ALARM_INTENT_EXTRA);
+            Util.log("MagicTimerActivity.onActivityResult:" + timer.getTimerDef().getDescription() + " " + timer.getTimerDef().getName());
             Vector<Timer> timers = TimerMgr.getAllTimers();
             if(timer != null)
             {
@@ -198,6 +199,11 @@ public class MagicTimerActivity extends Activity implements MsgReceiver
                 }
 
                 TimerMgr.setNextTimer(this, timer.getID());
+            }
+            
+            for(Timer t : timers)
+            {
+                Util.log("MagicTimerActivity.onActivityResult2:" + t.getTimerDef().getDescription() + " " + t.getTimerDef().getName());
             }
             break;
         default:
@@ -372,6 +378,7 @@ public class MagicTimerActivity extends Activity implements MsgReceiver
         @Override
         public void onClick(View v) 
         {
+            Util.log("ListenerNameInfo.onClick:" + mTimer.getTimerDef().getDescription() + " " + mTimer.getTimerDef().getName());
             startTimerSettingActivity(mTimer, REQUEST_CODE_TIMER_SETTING);
         }
     }

@@ -6,6 +6,8 @@ import com.thorqq.magictimer.core.TimerCalculator;
 import com.thorqq.magictimer.util.Util;
 
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
@@ -16,6 +18,7 @@ import android.widget.TimePicker;
 
 public class ChildViewTimeDef implements ChildViewInterface
 {
+    private View mParent;
     private View mView;
     private Timer mTimer;
     private Context mContext;
@@ -26,8 +29,11 @@ public class ChildViewTimeDef implements ChildViewInterface
     private EditText mEtMaxCount;
     private EditText mEtInterval;
     private CheckBox mCBInfinity;
+    
+//    private Button mBtnSave;
+//    private Button mBtnCancel;
 
-    private boolean mInitFlag = false;
+//    private boolean mInitFlag = false;
     
     public ChildViewTimeDef(Context context, Timer timer)
     {
@@ -39,21 +45,12 @@ public class ChildViewTimeDef implements ChildViewInterface
     @Override
     public View getLayoutView()
     {
-        if(mInitFlag == false)
-        {
-            initLayout();
-        }
         return mView;
     }
 
     @Override
     public void updateLayout()
-    {
-        if(mInitFlag == false)
-        {
-            initLayout();
-        }
-        
+    {        
         mTimePicker.setIs24HourView(true);
         mTimePicker.setCurrentHour(mTimerDef.getStartHour());
         mTimePicker.setCurrentMinute(mTimerDef.getStartMinute());
@@ -80,47 +77,57 @@ public class ChildViewTimeDef implements ChildViewInterface
         
     }
 
-    @Override
-    public void updateData()
-    {
-        if(mInitFlag == false)
-        {
-            initLayout();
-        }
-
-        mTimerDef.setStartHour(mTimePicker.getCurrentHour());
-        mTimerDef.setStartMinute(mTimePicker.getCurrentMinute());
-        mTimerDef.setInterval(Util.strToInt(mEtInterval.getText().toString()));
-        
-        if(mCBInfinity.isChecked())
-        {
-            mTimerDef.setMaxCount(TimerCalculator.INFINITY_COUNT);
-        }
-        else
-        {
-            mTimerDef.setMaxCount(Util.strToInt(mEtMaxCount.getText().toString()));
-        }
-    }
+//    @Override
+//    public void updateData()
+//    {
+//        mTimerDef.setStartHour(mTimePicker.getCurrentHour());
+//        mTimerDef.setStartMinute(mTimePicker.getCurrentMinute());
+//        mTimerDef.setInterval(Util.strToInt(mEtInterval.getText().toString()));
+//        
+//        if(mCBInfinity.isChecked())
+//        {
+//            mTimerDef.setMaxCount(TimerCalculator.INFINITY_COUNT);
+//        }
+//        else
+//        {
+//            mTimerDef.setMaxCount(Util.strToInt(mEtMaxCount.getText().toString()));
+//        }
+//    }
 
     @Override
-    public void initLayout()
+    public void initLayout(View parent)
     {
         Util.log("init ChildViewTimeDef");
         mInflater = LayoutInflater.from(mContext);
         mView = mInflater.inflate(R.layout.timedef_item_child, null);
+        mParent = parent;
         
         mTimePicker = (TimePicker) mView.findViewById(R.id.timePicker);
         mEtMaxCount = (EditText) mView.findViewById(R.id.editTextMaxCount);
         mCBInfinity = (CheckBox) mView.findViewById(R.id.checkBoxInfinity);
         mEtInterval = (EditText) mView.findViewById(R.id.editTextInterval);
         
-        registerListener();     
+//        mBtnSave   = (Button) mView.findViewById(R.id.btnSave);
+//        mBtnCancel = (Button) mView.findViewById(R.id.btnCancel);
         
-        mInitFlag = true;
-    }
+//        registerListener();     
+        
+//        mInitFlag = true;
+   }
 
-    private void registerListener()
+    public void registerListener()
     {
+        mTimePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener()
+        {
+            @Override
+            public void onTimeChanged(TimePicker view , int hourOfDay , int minute )
+            {
+                Util.log("mTimePicker.onTimeChanged");
+                mTimerDef.setStartHour(hourOfDay);
+                mTimerDef.setStartMinute(minute);                
+            }
+        });
+        
         mCBInfinity.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener()
         {
             @Override
@@ -128,8 +135,88 @@ public class ChildViewTimeDef implements ChildViewInterface
                     boolean isChecked)
             {
                 mEtMaxCount.setEnabled(!isChecked);
+                
+                if(isChecked)
+                {
+                    mTimerDef.setMaxCount(TimerCalculator.INFINITY_COUNT);
+                }
+                else
+                {
+                    mTimerDef.setMaxCount(Util.strToInt(mEtMaxCount.getText().toString()));
+                }
             }
         });
+        
+        mEtMaxCount.addTextChangedListener(new TextWatcher()
+        {
+
+            @Override
+            public void afterTextChanged(Editable arg0)
+            {                
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3)
+            {                
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count)
+            {
+                if(mCBInfinity.isChecked())
+                {
+                    mTimerDef.setMaxCount(TimerCalculator.INFINITY_COUNT);
+                }
+                else
+                {
+                    mTimerDef.setMaxCount(Util.strToInt(s.toString()));
+                }                
+            }
+            
+        });
+
+        mEtInterval.addTextChangedListener(new TextWatcher()
+        {
+
+            @Override
+            public void afterTextChanged(Editable arg0)
+            {                
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3)
+            {                
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count)
+            {
+                mTimerDef.setInterval(Util.strToInt(s.toString()));
+            }
+            
+        });
+        
+//        mBtnSave.setOnClickListener(new Button.OnClickListener()
+//        {
+//            @Override
+//            public void onClick(View v)
+//            {
+//                // TODO Auto-generated method stub
+//                updateData();
+//                mParent.setVisibility(View.GONE);
+//            }
+//        });
+//        
+//        mBtnCancel.setOnClickListener(new Button.OnClickListener()
+//        {
+//            @Override
+//            public void onClick(View v)
+//            {
+//                // TODO Auto-generated method stub
+//                mParent.setVisibility(View.GONE);
+//            }
+//        });
+
     }
   
     

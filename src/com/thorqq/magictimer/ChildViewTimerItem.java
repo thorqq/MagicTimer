@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 
 public class ChildViewTimerItem implements ChildViewInterface
 {
+    private View mParent;
     private View mView;
     private Timer mTimer;
     private Context mContext;
@@ -35,39 +36,28 @@ public class ChildViewTimerItem implements ChildViewInterface
     @Override
     public View getLayoutView()
     {
-        if(mInitFlag == false)
-        {
-            initLayout();
-        }
         return mView;
     }
 
     @Override
     public void updateLayout()
     {
-        if(mInitFlag == false)
-        {
-            initLayout();
-        }
         // TODO Auto-generated method stub
         
     }
 
-    @Override
-    public void updateData()
-    {
-        if(mInitFlag == false)
-        {
-            initLayout();
-        }
-        // TODO Auto-generated method stub
-    }
+//    @Override
+//    public void updateData()
+//    {
+//        // TODO Auto-generated method stub
+//    }
 
     @Override
-    public void initLayout()
+    public void initLayout(View parent)
     {
         mInflater = LayoutInflater.from(mContext);
         mView = mInflater.inflate(R.layout.timer_item_child, null);
+        mParent = parent;
         
         mLayoutTest   = (LinearLayout)mView.findViewById(R.id.LayoutTest);
         mLayoutDelete = (LinearLayout)mView.findViewById(R.id.LayoutDelete);
@@ -77,7 +67,7 @@ public class ChildViewTimerItem implements ChildViewInterface
         mInitFlag = true;
     }
 
-    private void registerListener()
+    public void registerListener()
     {
         mLayoutTest.setOnClickListener(new View.OnClickListener()
         {

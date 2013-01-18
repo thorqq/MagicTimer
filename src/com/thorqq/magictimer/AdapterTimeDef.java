@@ -122,9 +122,15 @@ public class AdapterTimeDef extends BaseAdapter
             holder.childView   = (ChildViewInterface)mData.get(position).get("childView");
             
             //×Ó²¼¾Ö
-            holder.childView.initLayout();
+            Util.log("initLayout:");
+            holder.childView.initLayout(holder.layoutDown);
+            Util.log("updateLayout");
+            holder.childView.updateLayout();
+            Util.log("addView");
             holder.layoutDown.addView(holder.childView.getLayoutView());
-            
+            Util.log("addView end");
+            holder.childView.registerListener();
+           
             //¼àÌýÆ÷
             holder.layoutUp.setOnClickListener(lster);
             
@@ -138,7 +144,9 @@ public class AdapterTimeDef extends BaseAdapter
         timedef = (TTimerDef)mData.get(position).get("timedef");
         holder.visibility  = (Integer)mData.get(position).get("visibility");
 
-        holder.time.setText(timedef.getDescription() + " ");
+        Util.log(timedef.getDescription() + " " + timedef.getName());
+        holder.time.setText(Util.formatTwoNumber(timedef.getStartHour()) + ":" + 
+                Util.formatTwoNumber(timedef.getStartMinute()) + " ");
         holder.name.setText(timedef.getName());
         holder.layoutDown.setVisibility(holder.visibility);
         holder.childView.updateLayout();

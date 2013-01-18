@@ -50,42 +50,47 @@
     </ScrollView>
 
     <LinearLayout
-        android:id="@+id/linearLayoutMiddle"
-        android:layout_width="fill_parent"
-        android:layout_height="1.0dip"
-        android:layout_above="@+id/linearLayoutBottom"
-        android:background="@drawable/gradient_shape_hor"/>
-
-    <LinearLayout
         android:id="@+id/linearLayoutBottom"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_alignParentBottom="true" >
-
-        <Button
-            android:id="@+id/btnSave"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-	        android:background="@drawable/btn_ok_cancel_selector"
-	        android:textColor="@android:color/white"
-	        android:textSize="16.0sp"
-            android:text="保存" />
-
+        
 	    <LinearLayout
-	        android:layout_width="1.0dip"
-	        android:layout_height="fill_parent"
-	        android:background="@drawable/gradient_shape_ver"/>
-
-        <Button
-            android:id="@+id/btnCancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-	        android:background="@drawable/btn_ok_cancel_selector"
-	        android:textColor="@android:color/white"
-	        android:textSize="16.0sp"
-            android:text="取消" />
-    </LinearLayout>
-
+	        android:id="@+id/linearLayoutMiddle"
+	        android:layout_width="fill_parent"
+	        android:layout_height="1.0dip"
+	        android:background="@drawable/gradient_shape_hor"/>
+	
+	    <LinearLayout
+	        android:id="@+id/linearLayoutBottomButton"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content">
+	
+	        <Button
+	            android:id="@+id/btnSave"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+		        android:background="@drawable/btn_ok_cancel_selector"
+		        android:textColor="@android:color/white"
+		        android:textSize="16.0sp"
+	            android:text="保存" />
+	
+		    <LinearLayout
+		        android:layout_width="1.0dip"
+		        android:layout_height="fill_parent"
+		        android:background="@drawable/gradient_shape_ver"/>
+	
+	        <Button
+	            android:id="@+id/btnCancel"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+		        android:background="@drawable/btn_ok_cancel_selector"
+		        android:textColor="@android:color/white"
+		        android:textSize="16.0sp"
+	            android:text="取消" />
+	    </LinearLayout>
+	</LinearLayout>
 </RelativeLayout>
