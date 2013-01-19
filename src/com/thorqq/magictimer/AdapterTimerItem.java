@@ -24,9 +24,10 @@ public class AdapterTimerItem extends BaseAdapter {
 
 	public final class ViewHolder{
 		
-        Timer timer;
-        ChildViewInterface childView;
-        int visibility = View.GONE;
+        public Timer timer;
+        public ChildViewInterface childView;
+        public int visibility = View.GONE;
+        public ChildViewParent parent;
 
         public TextView time;
 		public ImageView imageViewToggle;
@@ -122,7 +123,9 @@ public class AdapterTimerItem extends BaseAdapter {
 
             //×Ó²¼¾Ö
             holder.childView = (ChildViewInterface)mData.get(position).get("childView");
-            holder.childView.initLayout(holder.layoutDown);
+            holder.parent   = (ChildViewParent)mData.get(position).get("parent");
+
+            holder.childView.initLayout(holder.parent);
             holder.layoutDown.addView(holder.childView.getLayoutView());
             
 			convertView.setTag(holder);

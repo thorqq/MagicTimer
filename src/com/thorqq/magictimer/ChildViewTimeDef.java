@@ -16,9 +16,9 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 
 
-public class ChildViewTimeDef implements ChildViewInterface
+public class ChildViewTimeDef extends ChildViewInterface
 {
-    private View mParent;
+    private ChildViewParent mParent;
     private View mView;
     private Timer mTimer;
     private Context mContext;
@@ -77,25 +77,8 @@ public class ChildViewTimeDef implements ChildViewInterface
         
     }
 
-//    @Override
-//    public void updateData()
-//    {
-//        mTimerDef.setStartHour(mTimePicker.getCurrentHour());
-//        mTimerDef.setStartMinute(mTimePicker.getCurrentMinute());
-//        mTimerDef.setInterval(Util.strToInt(mEtInterval.getText().toString()));
-//        
-//        if(mCBInfinity.isChecked())
-//        {
-//            mTimerDef.setMaxCount(TimerCalculator.INFINITY_COUNT);
-//        }
-//        else
-//        {
-//            mTimerDef.setMaxCount(Util.strToInt(mEtMaxCount.getText().toString()));
-//        }
-//    }
-
     @Override
-    public void initLayout(View parent)
+    protected void doInitLayout(ChildViewParent parent)
     {
         Util.log("init ChildViewTimeDef");
         mInflater = LayoutInflater.from(mContext);
@@ -105,29 +88,23 @@ public class ChildViewTimeDef implements ChildViewInterface
         mTimePicker = (TimePicker) mView.findViewById(R.id.timePicker);
         mEtMaxCount = (EditText) mView.findViewById(R.id.editTextMaxCount);
         mCBInfinity = (CheckBox) mView.findViewById(R.id.checkBoxInfinity);
-        mEtInterval = (EditText) mView.findViewById(R.id.editTextInterval);
-        
-//        mBtnSave   = (Button) mView.findViewById(R.id.btnSave);
-//        mBtnCancel = (Button) mView.findViewById(R.id.btnCancel);
-        
-//        registerListener();     
-        
-//        mInitFlag = true;
+        mEtInterval = (EditText) mView.findViewById(R.id.editTextInterval);        
    }
 
-    public void registerListener()
+    protected void registerListener()
     {
         mTimePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener()
         {
             @Override
             public void onTimeChanged(TimePicker view , int hourOfDay , int minute )
             {
-                Util.log("mTimePicker.onTimeChanged");
                 mTimerDef.setStartHour(hourOfDay);
-                mTimerDef.setStartMinute(minute);                
+                mTimerDef.setStartMinute(minute);     
+                
+                mParent.dataUpdateNotify();
             }
         });
-        
+                
         mCBInfinity.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener()
         {
             @Override
@@ -195,29 +172,7 @@ public class ChildViewTimeDef implements ChildViewInterface
             }
             
         });
-        
-//        mBtnSave.setOnClickListener(new Button.OnClickListener()
-//        {
-//            @Override
-//            public void onClick(View v)
-//            {
-//                // TODO Auto-generated method stub
-//                updateData();
-//                mParent.setVisibility(View.GONE);
-//            }
-//        });
-//        
-//        mBtnCancel.setOnClickListener(new Button.OnClickListener()
-//        {
-//            @Override
-//            public void onClick(View v)
-//            {
-//                // TODO Auto-generated method stub
-//                mParent.setVisibility(View.GONE);
-//            }
-//        });
 
     }
-  
     
 }

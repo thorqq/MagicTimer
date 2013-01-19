@@ -22,7 +22,8 @@ public class AdapterTimeDef extends BaseAdapter
     public final class ViewHolder
     {
         public ChildViewInterface childView = null;
-        public int visibility = View.GONE;;
+        public int visibility = View.GONE;
+        public ChildViewParent parent;
 
         public TextView time;
         public TextView name;
@@ -120,16 +121,11 @@ public class AdapterTimeDef extends BaseAdapter
             //传递过来的数据
             lster       = (TimeDefButtonListener)mData.get(position).get("listener");
             holder.childView   = (ChildViewInterface)mData.get(position).get("childView");
+            holder.parent   = (ChildViewParent)mData.get(position).get("parent");
             
             //子布局
-            Util.log("initLayout:");
-            holder.childView.initLayout(holder.layoutDown);
-            Util.log("updateLayout");
-            holder.childView.updateLayout();
-            Util.log("addView");
+            holder.childView.initLayout(holder.parent);
             holder.layoutDown.addView(holder.childView.getLayoutView());
-            Util.log("addView end");
-            holder.childView.registerListener();
            
             //监听器
             holder.layoutUp.setOnClickListener(lster);
@@ -144,9 +140,8 @@ public class AdapterTimeDef extends BaseAdapter
         timedef = (TTimerDef)mData.get(position).get("timedef");
         holder.visibility  = (Integer)mData.get(position).get("visibility");
 
-        Util.log(timedef.getDescription() + " " + timedef.getName());
         holder.time.setText(Util.formatTwoNumber(timedef.getStartHour()) + ":" + 
-                Util.formatTwoNumber(timedef.getStartMinute()) + " ");
+                            Util.formatTwoNumber(timedef.getStartMinute()) + " ");
         holder.name.setText(timedef.getName());
         holder.layoutDown.setVisibility(holder.visibility);
         holder.childView.updateLayout();

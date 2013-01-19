@@ -12,9 +12,10 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 
-public class ChildViewTimerItem implements ChildViewInterface
+public class ChildViewTimerItem extends ChildViewInterface
 {
-    private View mParent;
+    @SuppressWarnings("unused")
+    private ChildViewParent mParent;
     private View mView;
     private Timer mTimer;
     private Context mContext;
@@ -23,9 +24,7 @@ public class ChildViewTimerItem implements ChildViewInterface
     
     private View mLayoutTest;
     private View mLayoutDelete;
-    
-    private boolean mInitFlag = false;
-    
+        
     public ChildViewTimerItem(Context context, Timer timer, MsgReceiver msgReceiver)
     {
         mContext = context;
@@ -42,18 +41,11 @@ public class ChildViewTimerItem implements ChildViewInterface
     @Override
     public void updateLayout()
     {
-        // TODO Auto-generated method stub
-        
+        // do nothing
     }
 
-//    @Override
-//    public void updateData()
-//    {
-//        // TODO Auto-generated method stub
-//    }
-
     @Override
-    public void initLayout(View parent)
+    protected void doInitLayout(ChildViewParent parent)
     {
         mInflater = LayoutInflater.from(mContext);
         mView = mInflater.inflate(R.layout.timer_item_child, null);
@@ -61,13 +53,9 @@ public class ChildViewTimerItem implements ChildViewInterface
         
         mLayoutTest   = (LinearLayout)mView.findViewById(R.id.LayoutTest);
         mLayoutDelete = (LinearLayout)mView.findViewById(R.id.LayoutDelete);
-        
-        registerListener();     
-        
-        mInitFlag = true;
     }
 
-    public void registerListener()
+    protected void registerListener()
     {
         mLayoutTest.setOnClickListener(new View.OnClickListener()
         {
@@ -111,6 +99,5 @@ public class ChildViewTimerItem implements ChildViewInterface
             mMsgReceiver.getMessage(MsgReceiver.MSG_DELETE_TIMER, mTimer.getID());
         }
     }
-  
     
 }

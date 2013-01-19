@@ -23,7 +23,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class SettingActivityTimer extends Activity
+public class SettingActivityTimer extends Activity implements ChildViewParent
 {
     public static final int REQUEST_CODE_TIME_SETTING = 1;
     public static final int REQUEST_CODE_LOOP_SETTING = 2;
@@ -58,7 +58,6 @@ public class SettingActivityTimer extends Activity
     private View mActionItemHeader;
 
     //save & cancel
-    private View mLayoutBotton;
     private Button mBtnSave;
     private Button mBtnCancel;
 
@@ -74,7 +73,6 @@ public class SettingActivityTimer extends Activity
             Util.log("mTimer is null");
             return;
         }
-        Util.log("SettingActivityTimer.onCreate:" + mTimer.getTimerDef().getDescription() + " " + mTimer.getTimerDef().getName());
 
         initLayout();
         updateLayout();
@@ -126,7 +124,6 @@ public class SettingActivityTimer extends Activity
         mBtnAddAction = (Button) mActionItemHeader.findViewById(R.id.btnAddAction);
         
         //
-        mLayoutBotton = (View) findViewById(R.id.linearLayoutBottom);
         mBtnSave = (Button) findViewById(R.id.btnSave);
         mBtnCancel = (Button) findViewById(R.id.btnCancel);
     }
@@ -161,6 +158,7 @@ public class SettingActivityTimer extends Activity
         map.put("timedef", mTimer.getTimerDef());
         map.put("listener", new TimeDefButtonListener(this, mTimer.getTimerDef()));        
         map.put("childView", new ChildViewTimeDef(this, mTimer));
+        map.put("parent", this);
         map.put("visibility", View.GONE);
         mTimeDefList.add(map);
 
@@ -362,7 +360,9 @@ public class SettingActivityTimer extends Activity
     //////////////////////////////////////////////////////////////////
     class TimeDefButtonListener implements OnClickListener 
     {
+        @SuppressWarnings("unused")
         private TTimerDef mTimerDef;
+        @SuppressWarnings("unused")
         private Context mContext;
 
         TimeDefButtonListener(Context context, TTimerDef timedef) 
@@ -373,18 +373,14 @@ public class SettingActivityTimer extends Activity
         
         @Override
         public void onClick(View v) 
-        {
-            Util.log("Click timedef" );
-            
+        {            
             if((Integer)mTimeDefList.get(0).get("visibility") == View.VISIBLE)
             {
                 mTimeDefList.get(0).put("visibility", View.GONE);
-//                mLayoutBotton.setVisibility(View.VISIBLE);
             }
             else
             {
                 mTimeDefList.get(0).put("visibility", View.VISIBLE);
-//                mLayoutBotton.setVisibility(View.GONE);
             }
 
             mTimeDefAdapter.notifyDataSetChanged(); 
@@ -430,5 +426,11 @@ public class SettingActivityTimer extends Activity
             i.putExtra(TimerMgr.ALARM_INTENT_LOOP_POLICY, mPolicy);
             startActivityForResult(i, SettingActivityTimer.REQUEST_CODE_LOOP_SETTING);
         }
+    }
+
+    @Override
+    public void dataUpdateNotify()
+    {
+        // TODO Auto-generated method stub
     }
 }

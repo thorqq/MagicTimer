@@ -2,16 +2,21 @@ package com.thorqq.magictimer;
 
 import android.view.View;
 
-public interface ChildViewInterface
+public abstract class ChildViewInterface
 {
-    //
-    public View getLayoutView();
-    //
-    public void initLayout(View parent);
+    //获取布局
+    public abstract View getLayoutView();
+    //初始化
+    public void initLayout(ChildViewParent parent)
+    {
+        this.doInitLayout(parent);
+        this.updateLayout();
+        this.registerListener();
+    }
     //更新布局
-    public void updateLayout();
-    //更新数据
-//    public void updateData();
+    public abstract void updateLayout();
+    
     //
-    public void registerListener();
+    protected abstract void registerListener();
+    protected abstract void doInitLayout(ChildViewParent parent);
 }
