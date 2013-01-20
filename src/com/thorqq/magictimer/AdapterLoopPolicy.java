@@ -99,7 +99,7 @@ public class AdapterLoopPolicy extends BaseAdapter
         {
             holder = new ViewHolder();
 
-            convertView = mInflater.inflate(R.layout.policy_item, null);
+            convertView = mInflater.inflate(R.layout.loop_item, null);
             holder.excludeFlag  = (Button) convertView.findViewById(R.id.btnExcludeFlag);
             holder.policyDetail = (TextView) convertView.findViewById(R.id.tvPolicyDetail);
             holder.deletePolicy = (Button) convertView.findViewById(R.id.btnDeletePolicy);

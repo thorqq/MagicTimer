@@ -108,7 +108,7 @@ public class SettingActivityTimer extends Activity implements ChildViewParent
         mLoopPolicyListView.setDivider(this.getResources().getDrawable(R.drawable.gradient_shape_hor));
         mLoopPolicyListView.setDividerHeight(1);
         
-        mPolicyItemHeader = getLayoutInflater().inflate(R.layout.policy_item_header, null);
+        mPolicyItemHeader = getLayoutInflater().inflate(R.layout.loop_item_header, null);
         mLoopPolicyListView.addHeaderView(mPolicyItemHeader);
         mBtnAddLoopPolicy = (Button) mPolicyItemHeader.findViewById(R.id.btnAddLoopPolicy);
 
